@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/features/login/presenter/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -5,9 +6,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
-      home: Container(),
+      home: LoginScreen(),
     );
   }
 }
