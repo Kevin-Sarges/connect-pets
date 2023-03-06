@@ -1,4 +1,5 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
+import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/features/splash/presenter/controller/splash_cubit.dart';
 import 'package:connect_pets/app/features/splash/presenter/controller/splash_state.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           child: Center(
             child: Image.asset(
-              'assets/images/logo.png',
+              ImagesApp.logo,
             ),
           ),
         ),
