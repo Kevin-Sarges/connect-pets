@@ -14,9 +14,9 @@ class SplashCubit extends Cubit<SplashState> {
 
     try {
       if (result != null) {
-        emit(SplashSucesso());
+        emit(SplashLogado());
       } else {
-        emit(SplashErro());
+        emit(SplashNaoLogado());
       }
     } catch (e) {
       emit(SplashErro());

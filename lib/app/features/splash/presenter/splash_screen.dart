@@ -1,7 +1,9 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
-import 'package:connect_pets/app/features/splash/domain/datasource/isplash_datasource.dart';
+import 'package:connect_pets/app/features/splash/presenter/controller/splash_cubit.dart';
+import 'package:connect_pets/app/features/splash/presenter/controller/splash_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,37 +14,35 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final cubit = GetIt.I.get<SplashDataSourceImpl>();
+  final _cubit = GetIt.I.get<SplashCubit>();
 
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      checkSignedIn(context);
-    });
-  }
-
-  void checkSignedIn(BuildContext ctx) async {
-    final user = await cubit.isLoggerIn();
-
-    if (user != null) {
-      Navigator.pushNamed(context, RoutesApp.home);
-    } else {
-      Navigator.pushNamed(context, RoutesApp.login);
-    }
+    _cubit.checkLogin();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: ColorsApp.linearGradientGreen,
-        ),
-        child: Center(
-          child: Image.asset(
-            'assets/images/logo.png',
+    return Scaffold(
+      body: BlocListener<SplashCubit, SplashState>(
+        bloc: _cubit,
+        listener: (context, state) {
+          if (state is SplashLogado) {
+            Navigator.of(context).pushReplacementNamed(RoutesApp.home);
+          }
+          if (state is SplashNaoLogado) {
+            Navigator.of(context).pushReplacementNamed(RoutesApp.login);
+          }
+        },
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: ColorsApp.linearGradientGreen,
+          ),
+          child: Center(
+            child: Image.asset(
+              'assets/images/logo.png',
+            ),
           ),
         ),
       ),
