@@ -8,6 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Connect pet',
+      debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
   }
