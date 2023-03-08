@@ -12,6 +12,8 @@ class SplashCubit extends Cubit<SplashState> {
 
     final result = await userIsLoggerUsecase();
 
+    print(result);
+
     emit(result.fold(
       (_) => SplashNaoLogado(),
       (_) => SplashLogado(),

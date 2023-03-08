@@ -6,11 +6,15 @@ class SplashDataSource implements SplashDataSourceImpl {
   final firebase = FirebaseAuth.instance;
 
   @override
-  Future<User?> isLoggerIn() async {
+  Future<bool> isLoggerIn() async {
     try {
       final user = firebase.currentUser;
 
-      return user;
+      if (user == null) {
+        return false;
+      } else {
+        return true;
+      }
     } on FirebaseException catch (e) {
       throw CommonNoInternetConnectionError(message: e);
     }
