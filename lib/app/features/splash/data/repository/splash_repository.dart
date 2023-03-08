@@ -10,11 +10,15 @@ class SplashRepository implements SplashRepositoryImpl {
   SplashRepository({required this.dataSource});
 
   @override
-  Future<Either<Failure, User?>> isLoggerIn() async {
+  Future<Either<Failure?, User?>> isLoggerIn() async {
     try {
       final result = await dataSource.isLoggerIn();
 
-      return Right(result);
+      if (result != null) {
+        return Right(result);
+      } else {
+        return const Left(null);
+      }
     } on Failure catch (e) {
       return Left(e);
     }

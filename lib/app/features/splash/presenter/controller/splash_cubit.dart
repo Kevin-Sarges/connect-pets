@@ -1,25 +1,20 @@
-import 'package:connect_pets/app/features/splash/domain/datasource/isplash_datasource.dart';
+import 'package:connect_pets/app/features/splash/domain/usecase/user_is_logger_usecase.dart';
 import 'package:connect_pets/app/features/splash/presenter/controller/splash_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit({required this.dataSource}) : super(SplashIntial());
+  SplashCubit({required this.userIsLoggerUsecase}) : super(SplashIntial());
 
-  final SplashDataSourceImpl dataSource;
+  final UserIsLoggerUsecase userIsLoggerUsecase;
 
   Future<void> checkLogin() async {
     emit(SplashCarregando());
 
-    final result = await dataSource.isLoggerIn();
+    final result = await userIsLoggerUsecase();
 
-    try {
-      if (result != null) {
-        emit(SplashLogado());
-      } else {
-        emit(SplashNaoLogado());
-      }
-    } catch (e) {
-      emit(SplashErro());
-    }
+    emit(result.fold(
+      (_) => SplashNaoLogado(),
+      (_) => SplashLogado(),
+    ));
   }
 }

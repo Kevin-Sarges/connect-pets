@@ -8,7 +8,7 @@ class UserIsLoggerUsecase {
 
   UserIsLoggerUsecase({required this.repository});
 
-  Future<Either<Failure, User?>> call() async {
+  Future<Either<Failure?, User?>> call() async {
     return await repository.isLoggerIn();
   }
 }

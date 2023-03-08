@@ -12,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ColorsApp.lightGray,
+      color: ColorsApp.blue,
     );
   }
 }
