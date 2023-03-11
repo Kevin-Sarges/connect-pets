@@ -11,8 +11,7 @@ class SplashCubit extends Cubit<SplashState> {
     emit(SplashCarregando());
 
     final result = await userIsLoggerUsecase();
-
-    print(result);
+    await Future.delayed(const Duration(seconds: 2));
 
     emit(result.fold(
       (_) => SplashNaoLogado(),
