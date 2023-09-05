@@ -1,11 +1,17 @@
-abstract class SplashState {}
+import 'package:connect_pets/app/common/error/failure.dart';
 
-class SplashIntial extends SplashState {}
+sealed class SplashState {}
 
-class SplashCarregando extends SplashState {}
+final class SplashIntial extends SplashState {}
 
-class SplashLogado extends SplashState {}
+final class SplashCarregando extends SplashState {}
 
-class SplashNaoLogado extends SplashState {}
+final class SplashLogado extends SplashState {}
 
-class SplashErro extends SplashState {}
+final class SplashNaoLogado extends SplashState {}
+
+final class SplashErro extends SplashState {
+  final Failure erro;
+
+  SplashErro(this.erro);
+}
