@@ -4,17 +4,18 @@ class ColorsApp {
   static const Color white = Color(0xFFFFFFFF);
   static const Color blue = Color(0xFF004FB5);
   static const Color red = Color(0xFFCE2915);
-  static const Color green = Color(0xFF03CE60);
-  static const Color greenPrimary = Color(0xFF188A24);
-  static const Color greenSecondary = Color(0xFF51DB24);
-  static const Color lightGreen = Color(0xFF67D93F);
-  static const Color darkGreen = Color(0xFF24611F);
-  static const Color lightGray = Color(0xFFE8EAED);
+  static const Color black = Color(0xFF000000);
+  static const Color green150 = Color(0xFF236320);
+  static const Color green100 = Color(0xFF04CB5E);
+  static const Color green50 = Color(0xFFC8F2DB);
+  static const Color grey150 = Color(0xFFBBBCBC);
+  static const Color grey100 = Color(0xFFD9D9D9);
+  static const Color grey50 = Color(0xFFE8EAED);
 
   static const linearGradientGreen = LinearGradient(
     colors: [
-      darkGreen,
-      green,
+      green150,
+      green100,
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
