@@ -1,4 +1,4 @@
-package com.example.connect_pets
+package br.com.connect_pets
 
 import io.flutter.embedding.android.FlutterActivity
 
