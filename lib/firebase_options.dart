@@ -4,6 +4,9 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+const apiKeyAndroid = String.fromEnvironment('APIKEY_FIREBASE_ANDROID');
+const apiKeyIos = String.fromEnvironment('APIKEY_FIREBASE_IOS');
+
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -50,7 +53,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAnrvHaVUgIacqWwcU0x4tX7uSkB-0-uo0',
+    apiKey: apiKeyAndroid,
     appId: '1:617366137822:android:5b001544a96da9280c4b4f',
     messagingSenderId: '617366137822',
     projectId: 'connect-pets-ee1fc',
@@ -58,12 +61,13 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA_PdRSFDq980m0z3B0et9zj6fcbO2-1pA',
+    apiKey: apiKeyIos,
     appId: '1:617366137822:ios:174c01cfacb9dd250c4b4f',
     messagingSenderId: '617366137822',
     projectId: 'connect-pets-ee1fc',
     storageBucket: 'connect-pets-ee1fc.appspot.com',
-    iosClientId: '617366137822-pb0rhi8emtnlavcjvgtcvgvfik3g9h3p.apps.googleusercontent.com',
+    iosClientId:
+        '617366137822-pb0rhi8emtnlavcjvgtcvgvfik3g9h3p.apps.googleusercontent.com',
     iosBundleId: 'com.example.connectPets',
   );
 }
