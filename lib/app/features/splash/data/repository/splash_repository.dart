@@ -1,6 +1,8 @@
+import 'package:connect_pets/app/common/error/failure.dart';
 import 'package:connect_pets/app/features/splash/domain/datasource/isplash_datasource.dart';
 import 'package:connect_pets/app/features/splash/domain/repository/isplash_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SplashRepository implements SplashRepositoryImpl {
   final SplashDataSourceImpl dataSource;
@@ -8,17 +10,13 @@ class SplashRepository implements SplashRepositoryImpl {
   SplashRepository({required this.dataSource});
 
   @override
-  Future<Either<bool, bool>> isLoggerIn() async {
+  Future<Either<Failure, User?>> isLoggerIn() async {
     try {
       final result = await dataSource.isLoggerIn();
 
-      if (result == true) {
-        return const Right(true);
-      } else {
-        return const Left(false);
-      }
-    } catch (e) {
-      return const Left(false);
+      return Right(result);
+    } on Failure catch (e) {
+      return Left(e);
     }
   }
 }
