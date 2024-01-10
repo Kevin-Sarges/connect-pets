@@ -28,14 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _loginFacebook() {
-    _clubit.facebook();
-
-    setState(() {
-      _clickButton = true;
-    });
-  }
-
   void _snackBarLogin(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -97,7 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 200,
                   ),
                   const Text(
-                    'Connect Pets',
+                    'Connect Pets\n Ponta de Pedras',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
                       color: ColorsApp.white,
@@ -125,6 +118,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const Text(
+                      'Faça Login',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     ButtonLoginWidget(
                       clickButton: _clickButton,
                       width: w,
@@ -134,18 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: 'Google',
                       onPressed: () {
                         _loginGoogle();
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    ButtonLoginWidget(
-                      clickButton: _clickButton,
-                      width: w,
-                      background: ColorsApp.blue,
-                      colorText: ColorsApp.white,
-                      image: ImagesApp.facebook,
-                      text: 'Facebook',
-                      onPressed: () {
-                        _loginFacebook();
                       },
                     ),
                   ],
