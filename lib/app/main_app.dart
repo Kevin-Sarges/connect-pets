@@ -1,6 +1,7 @@
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/features/doar/presenter/doar_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/home_screen.dart';
+import 'package:connect_pets/app/features/init/init.dart';
 import 'package:connect_pets/app/features/login/presenter/login_screen.dart';
 import 'package:connect_pets/app/features/perfil/presenter/perfil_screen.dart';
 import 'package:connect_pets/app/features/splash/presenter/splash_screen.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'Connect pet',
       debugShowCheckedModeBanner: false,
       routes: {
-        RoutesApp.initialRouter: (context) => const SplashScreen(),
+        RoutesApp.root: (context) => const SplashScreen(),
+        RoutesApp.initialPage: (context) => const InitScreen(),
         RoutesApp.login: (context) => const LoginScreen(),
         RoutesApp.home: (context) => const HomeScreen(),
         RoutesApp.perfil: (context) => const PerfilScreen(),
