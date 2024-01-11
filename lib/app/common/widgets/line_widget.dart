@@ -2,20 +2,21 @@ import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
 class LineWidget extends StatelessWidget {
-  const LineWidget({super.key, required this.width});
+  const LineWidget({super.key, required this.width, required this.color});
 
   final double width;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      decoration: const ShapeDecoration(
+      decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,
             strokeAlign: BorderSide.strokeAlignCenter,
-            color: ColorsApp.grey150,
+            color: color,
           ),
         ),
       ),
