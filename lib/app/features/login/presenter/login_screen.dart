@@ -1,6 +1,9 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
+import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
+import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
 import 'package:connect_pets/app/features/login/presenter/controller/login_cubit.dart';
 import 'package:connect_pets/app/features/login/presenter/controller/login_state.dart';
 import 'package:connect_pets/app/features/login/presenter/widget/button_login_widget.dart';
@@ -18,18 +21,21 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _clubit = GetIt.I.get<LoginCubit>();
+  final _formKey = GlobalKey<FormState>();
+  final _textControllerEmail = TextEditingController();
+  final _textControllerPassword = TextEditingController();
+
   bool _clickButton = false;
+  bool _isHiddenText = true;
 
-  void _loginGoogle() {
-    _clubit.google();
-
+  void _hiddenText() {
     setState(() {
-      _clickButton = true;
+      _isHiddenText = !_isHiddenText;
     });
   }
 
-  void _loginFacebook() {
-    _clubit.facebook();
+  void _loginGoogle() {
+    _clubit.google();
 
     setState(() {
       _clickButton = true;
@@ -97,7 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 200,
                   ),
                   const Text(
-                    'Connect Pets',
+                    'Connect Pets\n Ponta de Pedras',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
                       color: ColorsApp.white,
@@ -111,10 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
               bottom: 0,
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
+                  horizontal: 21,
                 ),
                 width: w,
-                height: h * 0.3,
+                height: h * 0.45,
                 decoration: const BoxDecoration(
                   color: ColorsApp.green50,
                   borderRadius: BorderRadius.only(
@@ -124,30 +131,89 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ButtonLoginWidget(
-                      clickButton: _clickButton,
-                      width: w,
-                      background: ColorsApp.white,
-                      colorText: ColorsApp.black,
-                      image: ImagesApp.google,
-                      text: 'Google',
-                      onPressed: () {
-                        _loginGoogle();
-                      },
+                    const Text(
+                      'Faça Login',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
                     ),
-                    const SizedBox(height: 10),
-                    ButtonLoginWidget(
-                      clickButton: _clickButton,
-                      width: w,
-                      background: ColorsApp.blue,
-                      colorText: ColorsApp.white,
-                      image: ImagesApp.facebook,
-                      text: 'Facebook',
-                      onPressed: () {
-                        _loginFacebook();
-                      },
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          InputFormWidget(
+                            keyboardType: TextInputType.emailAddress,
+                            label: "Email",
+                            icon: Icons.person,
+                            textController: _textControllerEmail,
+                          ),
+                          InputPasswordWidget(
+                            textEditingController: _textControllerPassword,
+                            icon: Icons.lock,
+                            label: "Senha",
+                            onTap: _hiddenText,
+                            keyBoardType: TextInputType.visiblePassword,
+                            obscureText: _isHiddenText,
+                            iconsObscure: _isHiddenText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorsApp.green100,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 48,
+                              vertical: 10,
+                            ),
+                          ),
+                          child: const Text(
+                            "Entrar",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Esqueciminha senha",
+                            style: TextStyle(
+                              color: ColorsApp.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 28),
+                    const DividerWidget(),
+                    const SizedBox(height: 11),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ButtonLoginWidget(
+                          clickButton: _clickButton,
+                          onPressed: () {
+                            _loginGoogle();
+                          },
+                          background: ColorsApp.white,
+                          image: ImagesApp.google,
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
