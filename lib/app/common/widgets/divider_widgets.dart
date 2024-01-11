@@ -30,12 +30,18 @@ class DividerWidget extends StatelessWidget {
           Positioned(
             left: 204,
             top: 8,
-            child: LineWidget(width: w * 0.5),
+            child: LineWidget(
+              width: w * 0.5,
+              color: ColorsApp.grey150,
+            ),
           ),
           Positioned(
             left: 0,
             top: 8,
-            child: LineWidget(width: w * 0.4),
+            child: LineWidget(
+              width: w * 0.4,
+              color: ColorsApp.grey150,
+            ),
           ),
         ],
       ),

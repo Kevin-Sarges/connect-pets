@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Navigator.of(context).pushReplacementNamed(RoutesApp.home);
           }
           if (state is SplashNaoLogado) {
-            Navigator.of(context).pushReplacementNamed(RoutesApp.login);
+            Navigator.of(context).pushReplacementNamed(RoutesApp.initialPage);
           }
         },
         child: Container(
