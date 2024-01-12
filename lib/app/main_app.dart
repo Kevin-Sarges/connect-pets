@@ -4,6 +4,7 @@ import 'package:connect_pets/app/features/home/presenter/home_screen.dart';
 import 'package:connect_pets/app/features/init/init.dart';
 import 'package:connect_pets/app/features/login/presenter/login_screen.dart';
 import 'package:connect_pets/app/features/perfil/presenter/perfil_screen.dart';
+import 'package:connect_pets/app/features/signup/presenter/signup_screen.dart';
 import 'package:connect_pets/app/features/splash/presenter/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         RoutesApp.root: (context) => const SplashScreen(),
         RoutesApp.initialPage: (context) => const InitScreen(),
+        RoutesApp.criar: (context) => const SignupScreen(),
         RoutesApp.login: (context) => const LoginScreen(),
         RoutesApp.home: (context) => const HomeScreen(),
         RoutesApp.perfil: (context) => const PerfilScreen(),
