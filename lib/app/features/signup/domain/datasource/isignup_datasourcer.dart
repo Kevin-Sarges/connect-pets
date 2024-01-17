@@ -1,5 +1,5 @@
-import 'package:connect_pets/app/common/entity/user_entity.dart';
+import 'package:connect_pets/app/common/model/user_model.dart';
 
 abstract interface class SignupDatasourceImpl{
-  Future<void> signupUser(UserEntity user);
+  Future<void> signupUser(UserModel userModel);
 }
