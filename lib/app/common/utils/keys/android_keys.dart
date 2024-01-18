@@ -4,5 +4,6 @@ class AndroidKeys {
   static const messagingSenderId =
   String.fromEnvironment('MESSAGING_SENDER_ID_ANDROID');
   static const projectId = String.fromEnvironment('PROJECT_ID_ANDROID');
+  static const databaseUrl = String.fromEnvironment("DATABASE_URL_ANDROID");
   static const storageBucket = String.fromEnvironment('STORAGE_BUCKET_ANDROID');
 }
