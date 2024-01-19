@@ -12,7 +12,7 @@ class SignupDatasource implements SignupDatasourceImpl {
   final _fireStore = FirebaseFirestore.instance;
 
   @override
-  Future<void> signupUser(UserModel userModel) async {
+  Future<void> signupUserEmailPassword(UserModel userModel) async {
     try {
       await _fireAuth.createUserWithEmailAndPassword(
         email: userModel.emailUser,

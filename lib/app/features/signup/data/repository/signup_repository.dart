@@ -11,9 +11,9 @@ class SignupRepository implements SignupRepositoryImpl {
   SignupRepository({required this.datasourceImpl});
 
   @override
-  Future<Either<Failure, void>> signupUser(UserModel userModel) async {
+  Future<Either<Failure, void>> signupUserEmailPassword(UserModel userModel) async {
     try {
-      final result = await datasourceImpl.signupUser(userModel);
+      final result = await datasourceImpl.signupUserEmailPassword(userModel);
 
       return Right(result);
     } on CommonNoDataFoundError catch(e) {

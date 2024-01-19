@@ -1,5 +1,5 @@
 import 'package:connect_pets/app/common/model/user_model.dart';
 
 abstract interface class SignupDatasourceImpl{
-  Future<void> signupUser(UserModel userModel);
+  Future<void> signupUserEmailPassword(UserModel userModel);
 }

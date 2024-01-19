@@ -9,6 +9,6 @@ class SignupUseCase {
   SignupUseCase({required this.repositoryImpl});
 
   Future<Either<Failure, void>> call(UserModel userModel) async {
-    return await repositoryImpl.signupUser(userModel);
+    return await repositoryImpl.signupUserEmailPassword(userModel);
   }
 }
