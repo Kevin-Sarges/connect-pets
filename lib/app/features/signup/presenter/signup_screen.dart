@@ -49,6 +49,10 @@ class _SignupScreenState extends State<SignupScreen> {
     final whatsappValue = int.parse(_textControllerNumberPhone.text);
 
     if (_textControllerPassword.text != _textControllerConfirmPassword.text) {
+      setState(() {
+        _clickButton = false;
+      });
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Confirmação de Senha incorreta!!"),
@@ -58,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         _clickButton = true;
 
-        _cubit.signupUser(
+        _cubit.signupUserEmailPassword(
           UserModel(
             cityUser: _textControllerCity.text,
             emailUser: _textControllerEmail.text,
@@ -204,7 +208,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       ButtonLoginWidget(
                         clickButton: _clickButton,
-                        onPressed: () {},
+                        onPressed: () => _cubit.signupGoogle(),
                         background: ColorsApp.white,
                         image: ImagesApp.google,
                       )

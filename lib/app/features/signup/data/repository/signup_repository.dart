@@ -4,6 +4,7 @@ import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/features/signup/domain/datasource/isignup_datasourcer.dart';
 import 'package:connect_pets/app/features/signup/domain/repository/isignup_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignupRepository implements SignupRepositoryImpl {
   final SignupDatasourceImpl datasourceImpl;
@@ -17,6 +18,17 @@ class SignupRepository implements SignupRepositoryImpl {
 
       return Right(result);
     } on CommonNoDataFoundError catch(e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserCredential>> signupGoogle() async {
+    try {
+      final result = await datasourceImpl.signupGoogle();
+
+      return Right(result);
+    } on CommonNoDataFoundError catch (e) {
       return Left(e);
     }
   }

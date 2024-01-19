@@ -3,6 +3,7 @@ import 'package:connect_pets/app/common/error/common_errors.dart';
 import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/features/signup/domain/datasource/isignup_datasourcer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
 
 const _uuid = Uuid();
@@ -34,6 +35,25 @@ class SignupDatasource implements SignupDatasourceImpl {
         throw CommonNoDataFoundError(message: e.message);
       }
 
+      throw CommonNoDataFoundError(message: e.message);
+    }
+  }
+
+  @override
+  Future<UserCredential> signupGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final response = _fireAuth.signInWithCredential(credential);
+
+      return response;
+    } on FirebaseException catch (e) {
       throw CommonNoDataFoundError(message: e.message);
     }
   }
