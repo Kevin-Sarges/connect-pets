@@ -183,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Entrar",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: ColorsApp.white,
                             ),
                           ),
                         ),

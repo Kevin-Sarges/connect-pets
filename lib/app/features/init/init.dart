@@ -14,7 +14,7 @@ class InitScreen extends StatefulWidget {
 
 class _InitScreenState extends State<InitScreen> {
   void _criarConta() {
-    Navigator.pushNamed(context, RoutesApp.criar);
+    Navigator.pushNamed(context, RoutesApp.signup);
   }
 
   void _loginScreen() {

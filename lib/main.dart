@@ -1,7 +1,7 @@
 import 'package:connect_pets/app/common/inject/inject_dependency.dart';
 import 'package:connect_pets/app/main_app.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
 void main() async {
