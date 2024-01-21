@@ -5,6 +5,7 @@ import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
 import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
+import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/login/presenter/widget/button_login_widget.dart';
 import 'package:connect_pets/app/features/signup/presenter/cubit/signup_cubit.dart';
 import 'package:connect_pets/app/features/signup/presenter/cubit/signup_state.dart';
@@ -45,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  void _creatUser() {
+  void _creatUserEmailPassword() {
     final whatsappValue = int.parse(_textControllerNumberPhone.text);
 
     if (_textControllerPassword.text != _textControllerConfirmPassword.text) {
@@ -75,6 +76,14 @@ class _SignupScreenState extends State<SignupScreen> {
     }
   }
 
+  void _creatUserGoogle() {
+    setState(() {
+      _clickButton = true;
+    });
+
+    _cubit.signupGoogle();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,14 +105,18 @@ class _SignupScreenState extends State<SignupScreen> {
               return;
             }
 
-            if (state is SignupSuccess) {
-              setState(() {
-                _clickButton = true;
-              });
-
+            if (state is SignupEmailPassWordSuccess) {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 RoutesApp.home,
+                (_) => false,
+              );
+            }
+
+            if (state is SignupSuccess) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                RoutesApp.finishSignup,
                 (_) => false,
               );
             }
@@ -181,22 +194,42 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 23),
-                  Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () => _creatUser(),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        backgroundColor: ColorsApp.green100,
-                      ),
-                      child: const Text(
-                        "Criar Conta",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: ColorsApp.white,
-                        ),
+                  AnimatedContainer(
+                    duration: const Duration(seconds: 6),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: _clickButton
+                            ? null
+                            : () => _creatUserEmailPassword(),
+                        style: _clickButton
+                            ? ButtonStyle(
+                                padding: MaterialStateProperty.all(
+                                  const EdgeInsets.symmetric(
+                                    vertical: 15,
+                                  ),
+                                ),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(99),
+                                  ),
+                                ),
+                              )
+                            : ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 48,
+                                  vertical: 15,
+                                ),
+                                backgroundColor: ColorsApp.green100,
+                              ),
+                        child: _clickButton
+                            ? const ProgressIndicatorWidget()
+                            : const Text(
+                                "Criar Conta",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorsApp.white,
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -208,7 +241,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     children: [
                       ButtonLoginWidget(
                         clickButton: _clickButton,
-                        onPressed: () => _cubit.signupGoogle(),
+                        onPressed: () => _creatUserGoogle(),
                         background: ColorsApp.white,
                         image: ImagesApp.google,
                       )

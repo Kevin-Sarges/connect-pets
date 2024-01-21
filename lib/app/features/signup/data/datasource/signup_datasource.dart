@@ -11,6 +11,7 @@ const _uuid = Uuid();
 class SignupDatasource implements SignupDatasourceImpl {
   final _fireAuth = FirebaseAuth.instance;
   final _fireStore = FirebaseFirestore.instance;
+  final _googleAuth = GoogleSignIn();
 
   @override
   Future<void> signupUserEmailPassword(UserModel userModel) async {
@@ -42,18 +43,17 @@ class SignupDatasource implements SignupDatasourceImpl {
   @override
   Future<UserCredential> signupGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final GoogleSignInAccount? googleUser = await _googleAuth.signIn();
+      final GoogleSignInAuthentication? googleAuthUser =
+          await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuthUser?.accessToken,
+        idToken: googleAuthUser?.idToken,
       );
 
-      final response = _fireAuth.signInWithCredential(credential);
-
-      return response;
-    } on FirebaseException catch (e) {
+      return await _fireAuth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
       throw CommonNoDataFoundError(message: e.message);
     }
   }

@@ -8,6 +8,8 @@ final class SignupLoading extends SignupState {}
 
 final class SignupSuccess extends SignupState {}
 
+final class SignupEmailPassWordSuccess extends SignupState {}
+
 final class SignupError extends SignupState {
   Failure error;
 

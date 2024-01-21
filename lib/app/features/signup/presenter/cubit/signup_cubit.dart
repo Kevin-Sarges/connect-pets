@@ -20,7 +20,7 @@ class SignupCubit extends Cubit<SignupState> {
 
     result.fold(
       (error) => emit(SignupError(error)),
-      (_) => emit(SignupSuccess()),
+      (_) => emit(SignupEmailPassWordSuccess()),
     );
   }
 
@@ -31,7 +31,7 @@ class SignupCubit extends Cubit<SignupState> {
 
     result.fold(
       (error) => emit(SignupError(error)),
-      (_) => SignupSuccess(),
+      (_) => emit(SignupSuccess()),
     );
   }
 }

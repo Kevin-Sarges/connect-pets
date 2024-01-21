@@ -1,5 +1,6 @@
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/features/doar/presenter/doar_screen.dart';
+import 'package:connect_pets/app/features/finish_signup/finish_signup_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/home_screen.dart';
 import 'package:connect_pets/app/features/init/init.dart';
 import 'package:connect_pets/app/features/login/presenter/login_screen.dart';
@@ -19,11 +20,12 @@ class MyApp extends StatelessWidget {
       routes: {
         RoutesApp.root: (context) => const SplashScreen(),
         RoutesApp.initialPage: (context) => const InitScreen(),
-        RoutesApp.criar: (context) => const SignupScreen(),
+        RoutesApp.signup: (context) => const SignupScreen(),
+        RoutesApp.finishSignup: (context) => const FinishSignupScreen(),
         RoutesApp.login: (context) => const LoginScreen(),
         RoutesApp.home: (context) => const HomeScreen(),
-        RoutesApp.perfil: (context) => const PerfilScreen(),
-        RoutesApp.doar: (context) => const DoarScreen(),
+        RoutesApp.profile: (context) => const PerfilScreen(),
+        RoutesApp.donate: (context) => const DoarScreen(),
       },
     );
   }
