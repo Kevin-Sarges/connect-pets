@@ -4,7 +4,7 @@ import 'package:connect_pets/app/features/login/domain/datasource/ilogin_datasou
 import 'package:connect_pets/app/features/login/domain/repository/ilogin_repository.dart';
 import 'package:connect_pets/app/features/login/domain/usecase/login_facebook_usecase.dart';
 import 'package:connect_pets/app/features/login/domain/usecase/login_google_usecase.dart';
-import 'package:connect_pets/app/features/login/presenter/controller/login_cubit.dart';
+import 'package:connect_pets/app/features/login/presenter/cubit/login_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 class LoginInjecDependency {

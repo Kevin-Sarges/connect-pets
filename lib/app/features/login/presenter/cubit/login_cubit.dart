@@ -1,6 +1,6 @@
 import 'package:connect_pets/app/features/login/domain/usecase/login_facebook_usecase.dart';
 import 'package:connect_pets/app/features/login/domain/usecase/login_google_usecase.dart';
-import 'package:connect_pets/app/features/login/presenter/controller/login_state.dart';
+import 'package:connect_pets/app/features/login/presenter/cubit/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
     final result = await loginGoogleUseCase();
 
     result.fold(
-      (erro) => emit(LoginErro(erro)),
+      (error) => emit(LoginErro(error)),
       (_) => emit(LoginSucesso()),
     );
   }
@@ -29,7 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
     final result = await loginFacebookUseCase();
 
     result.fold(
-      (erro) => emit(LoginErro(erro)),
+      (error) => emit(LoginErro(error)),
       (_) => emit(LoginSucesso()),
     );
   }
