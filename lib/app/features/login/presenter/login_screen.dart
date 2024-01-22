@@ -4,8 +4,8 @@ import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
 import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
-import 'package:connect_pets/app/features/login/presenter/controller/login_cubit.dart';
-import 'package:connect_pets/app/features/login/presenter/controller/login_state.dart';
+import 'package:connect_pets/app/features/login/presenter/cubit/login_cubit.dart';
+import 'package:connect_pets/app/features/login/presenter/cubit/login_state.dart';
 import 'package:connect_pets/app/features/login/presenter/widget/button_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _clubit = GetIt.I.get<LoginCubit>();
+  final _cubit = GetIt.I.get<LoginCubit>();
   final _formKey = GlobalKey<FormState>();
   final _textControllerEmail = TextEditingController();
   final _textControllerPassword = TextEditingController();
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _loginGoogle() {
-    _clubit.google();
+    _cubit.google();
 
     setState(() {
       _clickButton = true;
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       body: BlocListener(
-        bloc: _clubit,
+        bloc: _cubit,
         listener: (context, state) {
           if (state is LoginErro) {
             _snackBarLogin(state.erro.errorMessage);
