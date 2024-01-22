@@ -1,8 +1,8 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
-import 'package:connect_pets/app/features/splash/presenter/controller/splash_cubit.dart';
-import 'package:connect_pets/app/features/splash/presenter/controller/splash_state.dart';
+import 'package:connect_pets/app/features/splash/presenter/cubit/splash_cubit.dart';
+import 'package:connect_pets/app/features/splash/presenter/cubit/splash_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
