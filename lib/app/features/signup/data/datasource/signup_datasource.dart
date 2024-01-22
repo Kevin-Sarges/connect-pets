@@ -17,9 +17,15 @@ class SignupDatasource implements SignupDatasourceImpl {
   Future<void> signupUserEmailPassword(UserModel userModel) async {
     try {
       await _fireAuth.createUserWithEmailAndPassword(
-        email: userModel.emailUser,
-        password: userModel.passwordUser,
+        email: userModel.emailUser ?? "",
+        password: userModel.passwordUser ?? "",
       );
+
+      if(userModel.emailUser == null || userModel.passwordUser == null) {
+        throw CommonNoDataFoundError(message: "Erro ao Criar Usuário");
+      } else if(userModel.emailUser == "" || userModel.passwordUser == "") {
+        throw CommonNoDataFoundError(message: "Email ou senha vazios");
+      }
 
       await _fireStore.collection("users").doc().set({
         'id_user': _uuid.v4(),
