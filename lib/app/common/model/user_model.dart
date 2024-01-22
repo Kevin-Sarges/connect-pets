@@ -4,9 +4,9 @@ class UserModel extends UserEntity {
   UserModel({
     super.idUser,
     required super.cityUser,
-    required super.emailUser,
+    super.emailUser,
     required super.nameUser,
-    required super.passwordUser,
+    super.passwordUser,
     required super.whatsappUser,
   });
 
@@ -21,14 +21,14 @@ class UserModel extends UserEntity {
     );
   }
 
-  static Map<String, dynamic> toJson(UserEntity userEntity) {
+  static Map<String, dynamic> toJson(UserEntity? userEntity) {
     return {
-      'id_user': userEntity.idUser,
-      'city_user': userEntity.cityUser,
-      'email_user': userEntity.emailUser,
-      'name_user': userEntity.nameUser,
-      'password_user': userEntity.passwordUser,
-      'whatsapp_user': userEntity.whatsappUser,
+      'id_user': userEntity?.idUser,
+      'city_user': userEntity?.cityUser,
+      'email_user': userEntity?.emailUser,
+      'name_user': userEntity?.nameUser,
+      'password_user': userEntity?.passwordUser,
+      'whatsapp_user': userEntity?.whatsappUser,
     };
   }
 
