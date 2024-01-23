@@ -2,6 +2,7 @@ import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
+import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
 import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/finish_signup/presenter/cubit/finish_cubit.dart';
 import 'package:connect_pets/app/features/finish_signup/presenter/cubit/finish_state.dart';
@@ -22,23 +23,50 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   final _textControllerNameUser = TextEditingController();
   final _textControllerWhatsapp = TextEditingController();
   final _textControllerCity = TextEditingController();
+  final _textControllerPassword = TextEditingController();
+  final _textControllerConfirPassword = TextEditingController();
 
+  bool _isHiddenPassword = true;
+  bool _isHiddenConfirmPassword = true;
   bool _clickButton = false;
+
+  void _hiddenPassword() {
+    setState(() {
+      _isHiddenPassword = !_isHiddenPassword;
+    });
+  }
+
+  void _hiddenConfirmPassword() {
+    setState(() {
+      _isHiddenConfirmPassword = !_isHiddenConfirmPassword;
+    });
+  }
 
   void _creatUserEmailPassword() {
     final whatsappValue = int.parse(_textControllerWhatsapp.text);
 
-    setState(() {
-      _clickButton = true;
+    if(_textControllerPassword.text == _textControllerConfirPassword.text) {
+      setState(() {
+        _clickButton = true;
 
-      _cubit.finishSignupUser(
-        UserModel(
-          cityUser: _textControllerCity.text,
-          nameUser: _textControllerNameUser.text,
-          whatsappUser: whatsappValue,
-        ),
+        _cubit.finishSignupUser(
+          UserModel(
+            cityUser: _textControllerCity.text,
+            nameUser: _textControllerNameUser.text,
+            passwordUser: _textControllerPassword.text,
+            whatsappUser: whatsappValue,
+          ),
+        );
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Confirmação de senha errada!!"),),
       );
-    });
+
+      setState(() {
+        _clickButton = false;
+      });
+    }
   }
 
   @override
@@ -106,6 +134,28 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                           icon: Icons.location_city,
                           label: "Cidade",
                           textController: _textControllerCity,
+                        ),
+                        InputPasswordWidget(
+                          textEditingController: _textControllerPassword,
+                          icon: Icons.lock,
+                          label: "Senha",
+                          onTap: _hiddenPassword,
+                          keyBoardType: TextInputType.visiblePassword,
+                          obscureText: _isHiddenPassword,
+                          iconsObscure: _isHiddenPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        InputPasswordWidget(
+                          textEditingController: _textControllerConfirPassword,
+                          icon: Icons.lock,
+                          label: "Confirmar Senha",
+                          onTap: _hiddenConfirmPassword,
+                          keyBoardType: TextInputType.visiblePassword,
+                          obscureText: _isHiddenConfirmPassword,
+                          iconsObscure: _isHiddenConfirmPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                       ],
                     ),
