@@ -4,11 +4,11 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginFacebookUseCase {
-  final LoginReposiotryImpl reposiotryImpl;
+  final LoginRepositoryImpl repositoryImpl;
 
-  LoginFacebookUseCase({required this.reposiotryImpl});
+  LoginFacebookUseCase({required this.repositoryImpl});
 
   Future<Either<Failure, UserCredential>> call() async {
-    return await reposiotryImpl.signInWithFacebook();
+    return await repositoryImpl.signInWithFacebook();
   }
 }

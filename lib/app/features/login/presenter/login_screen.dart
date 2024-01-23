@@ -1,9 +1,11 @@
+import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
 import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
+import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/login/presenter/cubit/login_cubit.dart';
 import 'package:connect_pets/app/features/login/presenter/cubit/login_state.dart';
 import 'package:connect_pets/app/features/login/presenter/widget/button_login_widget.dart';
@@ -62,6 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void _loginEmailPassword() {
+    setState(() {
+      _clickButton = true;
+    });
+    _cubit.emailPassword(UserModel(
+      emailUser: _textControllerEmail.text,
+      passwordUser: _textControllerPassword.text,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
@@ -71,13 +83,13 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocListener(
         bloc: _cubit,
         listener: (context, state) {
-          if (state is LoginErro) {
-            _snackBarLogin(state.erro.errorMessage);
+          if (state is LoginError) {
+            _snackBarLogin(state.error.errorMessage);
 
             return;
           }
 
-          if (state is LoginSucesso) {
+          if (state is LoginSuccess) {
             _navigate();
 
             return;
@@ -171,7 +183,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed:
+                              _clickButton ? null : () => _loginEmailPassword(),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: ColorsApp.green100,
                             padding: const EdgeInsets.symmetric(
@@ -179,13 +192,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               vertical: 10,
                             ),
                           ),
-                          child: const Text(
-                            "Entrar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: ColorsApp.white,
-                            ),
-                          ),
+                          child: _clickButton
+                              ? const ProgressIndicatorWidget()
+                              : const Text(
+                                  "Entrar",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorsApp.white,
+                                  ),
+                                ),
                         ),
                         TextButton(
                           onPressed: () {},

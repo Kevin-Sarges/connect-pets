@@ -4,11 +4,11 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginGoogleUseCase {
-  final LoginReposiotryImpl reposiotryImpl;
+  final LoginRepositoryImpl repositoryImpl;
 
-  LoginGoogleUseCase({required this.reposiotryImpl});
+  LoginGoogleUseCase({required this.repositoryImpl});
 
   Future<Either<Failure, UserCredential>> call() async {
-    return await reposiotryImpl.signInWithGoogle();
+    return await repositoryImpl.signInWithGoogle();
   }
 }
