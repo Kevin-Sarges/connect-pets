@@ -1,4 +1,3 @@
-import 'package:connect_pets/app/common/error/common_errors.dart';
 import 'package:connect_pets/app/common/error/failure.dart';
 import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/features/signup/domain/datasource/isignup_datasourcer.dart';
@@ -17,7 +16,7 @@ class SignupRepository implements SignupRepositoryImpl {
       final result = await datasourceImpl.signupUserEmailPassword(userModel);
 
       return Right(result);
-    } on CommonNoDataFoundError catch(e) {
+    } on Failure catch(e) {
       return Left(e);
     }
   }
@@ -28,7 +27,7 @@ class SignupRepository implements SignupRepositoryImpl {
       final result = await datasourceImpl.signupGoogle();
 
       return Right(result);
-    } on CommonNoDataFoundError catch (e) {
+    } on Failure catch (e) {
       return Left(e);
     }
   }
