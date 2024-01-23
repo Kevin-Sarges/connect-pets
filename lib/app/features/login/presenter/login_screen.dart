@@ -56,6 +56,10 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  void _refactorPassword() {
+    Navigator.pushNamed(context, RoutesApp.refactorPassword);
+  }
+
   void _navigate() {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -203,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => _refactorPassword(),
                           child: const Text(
                             "Esqueciminha senha",
                             style: TextStyle(
@@ -222,9 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         ButtonLoginWidget(
                           clickButton: _clickButton,
-                          onPressed: () {
-                            _loginGoogle();
-                          },
+                          onPressed: () => _loginGoogle(),
                           background: ColorsApp.white,
                           image: ImagesApp.google,
                         ),
