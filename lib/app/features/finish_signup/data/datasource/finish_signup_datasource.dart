@@ -15,9 +15,9 @@ class FinishDataSource implements FinishDataSourceImpl {
   Future<void> finishSignup(UserEntity user) async {
     try {
       final userEmail = _fireAuth.currentUser?.email;
-      await _fireAuth.currentUser?.updatePassword(user.passwordUser);
+      await _fireAuth.currentUser?.updatePassword(user.passwordUser ?? "");
 
-      if(user.passwordUser.isEmpty) {
+      if(user.passwordUser == null || user.passwordUser == "") {
         throw CommonNoDataFoundError(message: "Senha Invalida");
       }
 

@@ -1,15 +1,15 @@
 import 'package:connect_pets/app/common/error/failure.dart';
 
-sealed class LoginState {}
+base class LoginState {}
 
-final class LoginInit extends LoginState {}
+final class LoginInitial extends LoginState {}
 
-final class LoginCarregando extends LoginState {}
+final class LoginLoading extends LoginState {}
 
-final class LoginSucesso extends LoginState {}
+final class LoginSuccess extends LoginState {}
 
-final class LoginErro extends LoginState {
-  final Failure erro;
+final class LoginError extends LoginState {
+  final Failure error;
 
-  LoginErro(this.erro);
+  LoginError(this.error);
 }

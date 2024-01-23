@@ -1,17 +1,17 @@
 class UserEntity {
   final String? idUser;
-  final String nameUser;
+  final String? nameUser;
   final String? emailUser;
-  final String cityUser;
-  final int whatsappUser;
-  final String passwordUser;
+  final String? cityUser;
+  final int? whatsappUser;
+  final String? passwordUser;
 
   UserEntity({
     this.idUser,
-    required this.cityUser,
+    this.cityUser,
     this.emailUser,
-    required this.nameUser,
-    required this.passwordUser,
-    required this.whatsappUser,
+    this.nameUser,
+    this.passwordUser,
+    this.whatsappUser,
   });
 }

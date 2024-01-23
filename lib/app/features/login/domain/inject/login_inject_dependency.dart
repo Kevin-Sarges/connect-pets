@@ -2,6 +2,7 @@ import 'package:connect_pets/app/features/login/data/datasource/login_datasource
 import 'package:connect_pets/app/features/login/data/repository/login_repository.dart';
 import 'package:connect_pets/app/features/login/domain/datasource/ilogin_datasource.dart';
 import 'package:connect_pets/app/features/login/domain/repository/ilogin_repository.dart';
+import 'package:connect_pets/app/features/login/domain/usecase/login_email_password_usecase.dart';
 import 'package:connect_pets/app/features/login/domain/usecase/login_facebook_usecase.dart';
 import 'package:connect_pets/app/features/login/domain/usecase/login_google_usecase.dart';
 import 'package:connect_pets/app/features/login/presenter/cubit/login_cubit.dart';
@@ -13,20 +14,25 @@ class LoginInjecDependency {
       () => LoginDataSource(),
     );
 
-    getIt.registerFactory<LoginReposiotryImpl>(
-      () => LoginRepositort(dataSourceImpl: getIt()),
+    getIt.registerFactory<LoginRepositoryImpl>(
+      () => LoginRepository(dataSourceImpl: getIt()),
+    );
+
+    getIt.registerFactory<LoginEmailPasswordUseCase>(
+      () => LoginEmailPasswordUseCase(repositoryImpl: getIt()),
     );
 
     getIt.registerFactory<LoginFacebookUseCase>(
-      () => LoginFacebookUseCase(reposiotryImpl: getIt()),
+      () => LoginFacebookUseCase(repositoryImpl: getIt()),
     );
 
     getIt.registerFactory<LoginGoogleUseCase>(
-      () => LoginGoogleUseCase(reposiotryImpl: getIt()),
+      () => LoginGoogleUseCase(repositoryImpl: getIt()),
     );
 
     getIt.registerFactory<LoginCubit>(
       () => LoginCubit(
+        loginEmailPasswordUseCase: getIt(),
         loginFacebookUseCase: getIt(),
         loginGoogleUseCase: getIt(),
       ),

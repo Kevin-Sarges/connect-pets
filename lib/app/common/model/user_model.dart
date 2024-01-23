@@ -3,11 +3,11 @@ import 'package:connect_pets/app/common/entity/user_entity.dart';
 class UserModel extends UserEntity {
   UserModel({
     super.idUser,
-    required super.cityUser,
+    super.cityUser,
     super.emailUser,
-    required super.nameUser,
-    required super.passwordUser,
-    required super.whatsappUser,
+    super.nameUser,
+    super.passwordUser,
+    super.whatsappUser,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -21,14 +21,14 @@ class UserModel extends UserEntity {
     );
   }
 
-  static Map<String, dynamic> toJson(UserEntity? userEntity) {
+  static Map<String, dynamic> toJson(UserEntity userEntity) {
     return {
-      'id_user': userEntity?.idUser,
-      'city_user': userEntity?.cityUser,
-      'email_user': userEntity?.emailUser,
-      'name_user': userEntity?.nameUser,
-      'password_user': userEntity?.passwordUser,
-      'whatsapp_user': userEntity?.whatsappUser,
+      'id_user': userEntity.idUser,
+      'city_user': userEntity.cityUser,
+      'email_user': userEntity.emailUser,
+      'name_user': userEntity.nameUser,
+      'password_user': userEntity.passwordUser,
+      'whatsapp_user': userEntity.whatsappUser,
     };
   }
 
