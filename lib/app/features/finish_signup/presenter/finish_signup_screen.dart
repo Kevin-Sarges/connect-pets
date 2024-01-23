@@ -1,6 +1,7 @@
 import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/widgets/button_global_widget.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
 import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
 import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
@@ -45,7 +46,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   void _creatUserEmailPassword() {
     final whatsappValue = int.parse(_textControllerWhatsapp.text);
 
-    if(_textControllerPassword.text == _textControllerConfirPassword.text) {
+    if (_textControllerPassword.text == _textControllerConfirPassword.text) {
       setState(() {
         _clickButton = true;
 
@@ -60,7 +61,9 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Confirmação de senha errada!!"),),
+        const SnackBar(
+          content: Text("Confirmação de senha errada!!"),
+        ),
       );
 
       setState(() {
@@ -161,43 +164,39 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                     ),
                   ),
                   const SizedBox(height: 21),
-                  AnimatedContainer(
-                    duration: const Duration(seconds: 6),
-                    child: Center(
-                      child: ElevatedButton(
-                        onPressed:
-                            _clickButton ? null : () => _creatUserEmailPassword(),
-                        style: _clickButton
-                            ? ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                  const EdgeInsets.symmetric(
-                                    vertical: 15,
-                                  ),
-                                ),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(99),
-                                  ),
-                                ),
-                              )
-                            : ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 48,
-                                  vertical: 15,
-                                ),
-                                backgroundColor: ColorsApp.green100,
+                  ButtonGlobalWidget(
+                    width: _clickButton ? 100 : double.infinity,
+                    buttonStyle: _clickButton
+                        ? ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                vertical: 15,
                               ),
-                        child: _clickButton
-                            ? const ProgressIndicatorWidget()
-                            : const Text(
-                                "Criar Conta",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorsApp.white,
-                                ),
+                            ),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(99),
                               ),
-                      ),
-                    ),
+                            ),
+                          )
+                        : ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 48,
+                              vertical: 15,
+                            ),
+                            backgroundColor: ColorsApp.green100,
+                          ),
+                    onPressed:
+                        _clickButton ? null : () => _creatUserEmailPassword(),
+                    child: _clickButton
+                        ? const ProgressIndicatorWidget()
+                        : const Text(
+                            "Criar Conta",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: ColorsApp.white,
+                            ),
+                          ),
                   ),
                 ],
               ),
