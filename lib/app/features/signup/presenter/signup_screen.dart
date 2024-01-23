@@ -33,7 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPassword = true;
-  bool _clickButton = true;
+  bool _clickButton = false;
 
   void _hiddenPassword() {
     setState(() {
