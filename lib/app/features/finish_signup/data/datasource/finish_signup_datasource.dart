@@ -26,7 +26,6 @@ class FinishDataSource implements FinishDataSourceImpl {
         'city_user': user.cityUser,
         'email_user': userEmail,
         'name_user': user.nameUser,
-        'password_user': user.passwordUser,
         'whatsapp_user': user.whatsappUser,
       });
     } on FirebaseException catch(e) {

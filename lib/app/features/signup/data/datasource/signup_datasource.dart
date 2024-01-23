@@ -32,7 +32,6 @@ class SignupDatasource implements SignupDatasourceImpl {
         'city_user': userModel.cityUser,
         'email_user': userModel.emailUser,
         'name_user': userModel.nameUser,
-        'password_user': userModel.passwordUser,
         'whatsapp_user': userModel.whatsappUser,
       });
     } on FirebaseAuthException catch (e) {
