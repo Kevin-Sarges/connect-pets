@@ -21,14 +21,14 @@ class UserModel extends UserEntity {
     );
   }
 
-  static Map<String, dynamic> toJson(UserEntity userEntity) {
+  Map<String, dynamic> toJson() {
     return {
-      'id_user': userEntity.idUser,
-      'city_user': userEntity.cityUser,
-      'email_user': userEntity.emailUser,
-      'name_user': userEntity.nameUser,
-      'password_user': userEntity.passwordUser,
-      'whatsapp_user': userEntity.whatsappUser,
+      'id_user': idUser,
+      'city_user': cityUser,
+      'email_user': emailUser,
+      'name_user': nameUser,
+      'password_user': passwordUser,
+      'whatsapp_user': whatsappUser,
     };
   }
 
