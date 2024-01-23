@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connect_pets/app/common/entity/user_entity.dart';
 import 'package:connect_pets/app/common/error/common_errors.dart';
-import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/features/finish_signup/domain/datasource/ifinish_datasource.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
@@ -16,12 +15,18 @@ class FinishDataSource implements FinishDataSourceImpl {
   Future<void> finishSignup(UserEntity user) async {
     try {
       final userEmail = _fireAuth.currentUser?.email;
+      await _fireAuth.currentUser?.updatePassword(user.passwordUser);
+
+      if(user.passwordUser.isEmpty) {
+        throw CommonNoDataFoundError(message: "Senha Invalida");
+      }
 
       await _fireStore.collection("users").doc().set({
         'id_user': _uuid.v4(),
         'city_user': user.cityUser,
         'email_user': userEmail,
         'name_user': user.nameUser,
+        'password_user': user.passwordUser,
         'whatsapp_user': user.whatsappUser,
       });
     } on FirebaseException catch(e) {
