@@ -19,7 +19,7 @@ class ButtonGlobalWidget extends StatelessWidget {
     return Center(
       child: AnimatedContainer(
         width: width,
-        duration: const Duration(seconds: 6),
+        duration: const Duration(seconds: 1),
         child: ElevatedButton(
           onPressed: onPressed,
           style: buttonStyle,

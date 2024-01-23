@@ -36,6 +36,8 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: ColorsApp.green50,
       body: Center(
@@ -99,7 +101,7 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
                 ),
                 const SizedBox(height: 21),
                 ButtonGlobalWidget(
-                  width: _clickButton ? 100 : double.infinity,
+                  width: _clickButton ? 100 : w,
                   buttonStyle: _clickButton
                       ? ButtonStyle(
                     padding: MaterialStateProperty.all(

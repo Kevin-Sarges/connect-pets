@@ -87,6 +87,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: ColorsApp.green50,
       body: SafeArea(
@@ -211,19 +213,19 @@ class _SignupScreenState extends State<SignupScreen> {
                           )
                         : ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 48,
                               vertical: 15,
                             ),
                             backgroundColor: ColorsApp.green100,
                           ),
                     onPressed:
                         _clickButton ? null : () => _creatUserEmailPassword(),
-                    width: _clickButton ? 100 : double.infinity,
+                    width: _clickButton ? 100 : w,
                     child: _clickButton
                         ? const ProgressIndicatorWidget()
                         : const Text(
                             "Criar Conta",
                             style: TextStyle(
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: ColorsApp.white,
                             ),

@@ -74,6 +74,8 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: ColorsApp.green50,
       body: SafeArea(
@@ -165,7 +167,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                   ),
                   const SizedBox(height: 21),
                   ButtonGlobalWidget(
-                    width: _clickButton ? 100 : double.infinity,
+                    width: _clickButton ? 100 : w,
                     buttonStyle: _clickButton
                         ? ButtonStyle(
                             padding: MaterialStateProperty.all(
