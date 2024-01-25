@@ -1,4 +1,3 @@
-import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
 class LineWidget extends StatelessWidget {

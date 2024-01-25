@@ -28,6 +28,8 @@ class InputPasswordWidget extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return "Campo esta vazio!!";
         }
+
+        return null;
       },
       controller: textEditingController,
       keyboardType: keyBoardType,
