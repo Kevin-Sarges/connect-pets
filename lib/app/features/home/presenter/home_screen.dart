@@ -11,8 +11,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorsApp.blue,
+    return Scaffold(
+      body: Container(
+        color: ColorsApp.green50,
+      ),
     );
   }
 }
