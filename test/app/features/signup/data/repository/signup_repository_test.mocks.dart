@@ -41,15 +41,29 @@ class _FakeUserCredential_0 extends _i1.SmartFake
 class MockSignupDatasourceImpl extends _i1.Mock
     implements _i3.SignupDatasourceImpl {
   @override
-  _i4.Future<void> signupUserEmailPassword(_i5.UserModel? userModel) =>
+  _i4.Future<_i2.UserCredential> signupUserEmailPassword(
+          _i5.UserModel? userModel) =>
       (super.noSuchMethod(
         Invocation.method(
           #signupUserEmailPassword,
           [userModel],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
+          this,
+          Invocation.method(
+            #signupUserEmailPassword,
+            [userModel],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.UserCredential>.value(_FakeUserCredential_0(
+          this,
+          Invocation.method(
+            #signupUserEmailPassword,
+            [userModel],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserCredential>);
 
   @override
   _i4.Future<_i2.UserCredential> signupGoogle() => (super.noSuchMethod(

@@ -9,7 +9,7 @@ class DividerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
 
-    return Container(
+    return SizedBox(
       height: 16,
       child: Stack(
         children: [
