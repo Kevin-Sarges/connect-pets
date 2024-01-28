@@ -4,6 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract interface class SignupRepositoryImpl {
-  Future<Either<Failure, void>> signupUserEmailPassword(UserModel userModel);
+  Future<Either<Failure, UserCredential>> signupUserEmailPassword(
+    UserModel userModel,
+  );
   Future<Either<Failure, UserCredential>> signupGoogle();
 }

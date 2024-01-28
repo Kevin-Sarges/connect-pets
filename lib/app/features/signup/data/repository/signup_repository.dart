@@ -11,12 +11,14 @@ class SignupRepository implements SignupRepositoryImpl {
   SignupRepository({required this.datasourceImpl});
 
   @override
-  Future<Either<Failure, void>> signupUserEmailPassword(UserModel userModel) async {
+  Future<Either<Failure, UserCredential>> signupUserEmailPassword(
+    UserModel userModel,
+  ) async {
     try {
       final result = await datasourceImpl.signupUserEmailPassword(userModel);
 
       return Right(result);
-    } on Failure catch(e) {
+    } on Failure catch (e) {
       return Left(e);
     }
   }

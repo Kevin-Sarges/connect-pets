@@ -1,7 +1,7 @@
 import 'package:connect_pets/app/common/entity/user_entity.dart';
 
 class UserModel extends UserEntity {
-  UserModel({
+  const UserModel({
     super.idUser,
     super.cityUser,
     super.emailUser,

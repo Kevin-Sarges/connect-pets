@@ -9,46 +9,54 @@ import 'package:uuid/uuid.dart';
 const _uuid = Uuid();
 
 class SignupDatasource implements SignupDatasourceImpl {
-  final _fireAuth = FirebaseAuth.instance;
-  final _fireStore = FirebaseFirestore.instance;
-  final _googleAuth = GoogleSignIn();
+  final FirebaseAuth fireAuth;
+  final FirebaseFirestore fireStore;
+  final GoogleSignIn googleAuth;
+
+  SignupDatasource({
+    required this.fireAuth,
+    required this.fireStore,
+    required this.googleAuth,
+  });
 
   @override
-  Future<void> signupUserEmailPassword(UserModel userModel) async {
+  Future<UserCredential> signupUserEmailPassword(UserModel userModel) async {
     try {
-      await _fireAuth.createUserWithEmailAndPassword(
+      final user = await fireAuth.createUserWithEmailAndPassword(
         email: userModel.emailUser ?? "",
         password: userModel.passwordUser ?? "",
       );
 
-      if(userModel.emailUser == null || userModel.passwordUser == null) {
-        throw CommonNoDataFoundError(message: "Erro ao Criar Usuário");
-      } else if(userModel.emailUser == "" || userModel.passwordUser == "") {
+      if (userModel.emailUser == null || userModel.passwordUser == null) {
+        throw CommonNoDataFoundError(message: "Email ou senha vazios");
+      } else if (userModel.emailUser == "" || userModel.passwordUser == "") {
         throw CommonNoDataFoundError(message: "Email ou senha vazios");
       }
 
-      await _fireStore.collection("users").doc().set({
+      await fireStore.collection("users").doc().set({
         'id_user': _uuid.v4(),
         'city_user': userModel.cityUser,
         'email_user': userModel.emailUser,
         'name_user': userModel.nameUser,
         'whatsapp_user': userModel.whatsappUser,
       });
+
+      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
-        throw CommonNoDataFoundError(message: e.message);
+        throw CommonNoDataFoundError(message: "Senha muito curta");
       } else if (e.code == "email-already-in-use") {
-        throw CommonNoDataFoundError(message: e.message);
+        throw CommonNoDataFoundError(message: "Email já esta cadastrado");
       }
 
-      throw CommonNoDataFoundError(message: e.message);
+      throw CommonDesconhecidoError();
     }
   }
 
   @override
   Future<UserCredential> signupGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleAuth.signIn();
+      final GoogleSignInAccount? googleUser = await googleAuth.signIn();
       final GoogleSignInAuthentication? googleAuthUser =
           await googleUser?.authentication;
 
@@ -57,7 +65,7 @@ class SignupDatasource implements SignupDatasourceImpl {
         idToken: googleAuthUser?.idToken,
       );
 
-      return await _fireAuth.signInWithCredential(credential);
+      return await fireAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw CommonNoDataFoundError(message: e.message);
     }
