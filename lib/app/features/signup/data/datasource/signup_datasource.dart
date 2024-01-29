@@ -9,20 +9,14 @@ import 'package:uuid/uuid.dart';
 const _uuid = Uuid();
 
 class SignupDatasource implements SignupDatasourceImpl {
-  final FirebaseAuth fireAuth;
-  final FirebaseFirestore fireStore;
-  final GoogleSignIn googleAuth;
-
-  SignupDatasource({
-    required this.fireAuth,
-    required this.fireStore,
-    required this.googleAuth,
-  });
+  final _fireAuth = FirebaseAuth.instance;
+  final _fireStore = FirebaseFirestore.instance;
+  final _googleAuth = GoogleSignIn();
 
   @override
   Future<UserCredential> signupUserEmailPassword(UserModel userModel) async {
     try {
-      final user = await fireAuth.createUserWithEmailAndPassword(
+      final user = await _fireAuth.createUserWithEmailAndPassword(
         email: userModel.emailUser ?? "",
         password: userModel.passwordUser ?? "",
       );
@@ -33,7 +27,7 @@ class SignupDatasource implements SignupDatasourceImpl {
         throw CommonNoDataFoundError(message: "Email ou senha vazios");
       }
 
-      await fireStore.collection("users").doc().set({
+      await _fireStore.collection("users").doc().set({
         'id_user': _uuid.v4(),
         'city_user': userModel.cityUser,
         'email_user': userModel.emailUser,
@@ -56,7 +50,7 @@ class SignupDatasource implements SignupDatasourceImpl {
   @override
   Future<UserCredential> signupGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await googleAuth.signIn();
+      final GoogleSignInAccount? googleUser = await _googleAuth.signIn();
       final GoogleSignInAuthentication? googleAuthUser =
           await googleUser?.authentication;
 
@@ -65,7 +59,7 @@ class SignupDatasource implements SignupDatasourceImpl {
         idToken: googleAuthUser?.idToken,
       );
 
-      return await fireAuth.signInWithCredential(credential);
+      return await _fireAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw CommonNoDataFoundError(message: e.message);
     }

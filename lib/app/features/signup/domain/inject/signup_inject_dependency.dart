@@ -10,11 +10,7 @@ import 'package:get_it/get_it.dart';
 class SignupInjectDependency {
   static void init(GetIt getIt) {
     getIt.registerFactory<SignupDatasourceImpl>(
-      () => SignupDatasource(
-        fireAuth: getIt(),
-        fireStore: getIt(),
-        googleAuth: getIt(),
-      ),
+      () => SignupDatasource(),
     );
 
     getIt.registerFactory<SignupRepositoryImpl>(

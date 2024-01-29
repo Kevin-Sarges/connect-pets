@@ -1,19 +1,19 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class FeedScreen extends StatefulWidget {
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<FeedScreen> createState() => _FeedScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: ColorsApp.green50,
+        color: ColorsApp.grey50,
       ),
     );
   }
