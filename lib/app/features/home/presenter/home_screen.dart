@@ -35,16 +35,15 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems(String name) {
+  List<PersistentBottomNavBarItem> _navBarsItems(String name, String image) {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home),
-        title: ("Feed"),
         activeColorPrimary: ColorsApp.green100,
         inactiveColorPrimary: ColorsApp.black,
       ),
       PersistentBottomNavBarItem(
-        icon:const Icon(
+        icon: const Icon(
           Icons.add,
           color: ColorsApp.white,
         ),
@@ -53,8 +52,20 @@ class _HomeScreenState extends State<HomeScreen> {
         inactiveColorPrimary: ColorsApp.black,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.person),
-        title: (name),
+        icon: Container(
+          width: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(
+              width: 1,
+              color: ColorsApp.green100,
+            ),
+            image: DecorationImage(
+              image: NetworkImage(image),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
         activeColorPrimary: ColorsApp.green100,
         inactiveColorPrimary: ColorsApp.black,
       ),
@@ -68,12 +79,15 @@ class _HomeScreenState extends State<HomeScreen> {
         bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
           bloc: _cubit,
           builder: (context, state) {
-            if(state is HomeSuccess) {
+            if (state is HomeSuccess) {
               return PersistentTabView(
                 context,
                 controller: _controller,
                 screens: _buildScreens(),
-                items: _navBarsItems(state.user.email.toString()),
+                items: _navBarsItems(
+                  state.user.displayName.toString(),
+                  state.user.photoURL.toString(),
+                ),
                 backgroundColor: ColorsApp.green50,
                 decoration: NavBarDecoration(
                   borderRadius: BorderRadius.circular(10.0),
