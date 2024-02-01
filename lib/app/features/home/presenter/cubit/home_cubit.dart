@@ -9,14 +9,14 @@ class HomeCubit extends Cubit<HomeState> {
 
   final UserDetailsUseCase userDetailsUseCase;
 
-  Future<void> userDetails() async {
+  Future<void> userDetails(String id) async {
     emit(HomeLoading());
 
-    final result = await userDetailsUseCase();
+    final result = await userDetailsUseCase(id);
 
     result.fold(
       (error) => emit(HomeError(error)),
-      (success) => emit(HomeSuccess(success!)),
+      (success) => emit(HomeSuccess(success)),
     );
   }
 }

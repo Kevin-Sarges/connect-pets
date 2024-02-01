@@ -13,7 +13,7 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: ColorsApp.grey50,
+        color: ColorsApp.blue,
       ),
     );
   }

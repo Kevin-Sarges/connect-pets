@@ -1,9 +1,9 @@
+import 'package:connect_pets/app/common/entity/user_entity.dart';
 import 'package:connect_pets/app/common/error/common_errors.dart';
 import 'package:connect_pets/app/common/error/failure.dart';
 import 'package:connect_pets/app/features/home/domain/datasource/ihome_datasource.dart';
 import 'package:connect_pets/app/features/home/domain/repository/ihome_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeRepository implements HomeRepositoryImpl {
   final HomeDatasourceImpl datasourceImpl;
@@ -11,9 +11,9 @@ class HomeRepository implements HomeRepositoryImpl {
   HomeRepository({required this.datasourceImpl});
 
   @override
-  Future<Either<Failure, User?>> userDetails() async {
+  Future<Either<Failure, UserEntity>> userDetails(String id) async {
     try {
-      final result = await datasourceImpl.userDetails();
+      final result = await datasourceImpl.userDetails(id);
 
       return Right(result);
     } on CommonNoDataFoundError catch(e) {

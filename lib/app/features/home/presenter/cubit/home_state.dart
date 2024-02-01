@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/common/entity/user_entity.dart';
 import 'package:connect_pets/app/common/error/failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -8,7 +9,7 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeSuccess extends HomeState {
-  User user;
+  UserEntity user;
 
   HomeSuccess(this.user);
 }

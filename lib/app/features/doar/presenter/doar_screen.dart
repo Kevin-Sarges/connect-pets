@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
 class DoarScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class DoarScreen extends StatefulWidget {
 class _DoarScreenState extends State<DoarScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: ColorsApp.black,
+    );
   }
 }

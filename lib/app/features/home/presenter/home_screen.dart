@@ -4,6 +4,7 @@ import 'package:connect_pets/app/features/feed/presenter/feed_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_state.dart';
 import 'package:connect_pets/app/features/perfil/presenter/perfil_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -19,12 +20,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _controller = PersistentTabController();
   final _cubit = GetIt.I.get<HomeCubit>();
+  final _uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   void initState() {
     super.initState();
 
-    _cubit.userDetails();
+    _cubit.userDetails(_uid!);
   }
 
   List<Widget> _buildScreens() {
@@ -35,10 +37,11 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems(String name, String image) {
+  List<PersistentBottomNavBarItem> _navBarsItems({required String nameUser}) {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.home),
+        title: ("Feed"),
         activeColorPrimary: ColorsApp.green100,
         inactiveColorPrimary: ColorsApp.black,
       ),
@@ -52,20 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
         inactiveColorPrimary: ColorsApp.black,
       ),
       PersistentBottomNavBarItem(
-        icon: Container(
-          width: 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(999),
-            border: Border.all(
-              width: 1,
-              color: ColorsApp.green100,
-            ),
-            image: DecorationImage(
-              image: NetworkImage(image),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+        icon: const Icon(Icons.person),
+        title: (nameUser),
         activeColorPrimary: ColorsApp.green100,
         inactiveColorPrimary: ColorsApp.black,
       ),
@@ -85,12 +76,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 controller: _controller,
                 screens: _buildScreens(),
                 items: _navBarsItems(
-                  state.user.displayName.toString(),
-                  state.user.photoURL.toString(),
+                  nameUser: state.user.nameUser.toString(),
                 ),
                 backgroundColor: ColorsApp.green50,
-                decoration: NavBarDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                decoration: const NavBarDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
                 ),
                 screenTransitionAnimation: const ScreenTransitionAnimation(
                   animateTabTransition: true,
