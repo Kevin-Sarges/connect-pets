@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
 class PerfilScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class PerfilScreen extends StatefulWidget {
 class _PerfilScreenState extends State<PerfilScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: ColorsApp.red,
+    );
   }
 }
