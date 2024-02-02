@@ -11,8 +11,11 @@ class FinishDataSource implements FinishDataSourceImpl {
   @override
   Future<void> finishSignup(UserEntity user) async {
     try {
-      final uid = _fireAuth.currentUser?.uid;
-      final userEmail = _fireAuth.currentUser?.email;
+      final userFireAuth = _fireAuth.currentUser;
+
+      final uid = userFireAuth?.uid;
+      final userEmail = userFireAuth?.email;
+      final imageUrl = userFireAuth?.photoURL;
 
       await _fireAuth.currentUser?.updatePassword(user.passwordUser ?? "");
 
@@ -22,6 +25,7 @@ class FinishDataSource implements FinishDataSourceImpl {
 
       await _fireStore.collection("users").doc().set({
         'id_user': uid,
+        'image_user': imageUrl,
         'city_user': user.cityUser,
         'email_user': userEmail,
         'name_user': user.nameUser,

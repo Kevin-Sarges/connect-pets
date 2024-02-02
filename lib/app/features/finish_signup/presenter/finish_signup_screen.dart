@@ -10,6 +10,7 @@ import 'package:connect_pets/app/features/finish_signup/presenter/cubit/finish_s
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FinishSignupScreen extends StatefulWidget {
   const FinishSignupScreen({super.key});
@@ -26,6 +27,11 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   final _textControllerCity = TextEditingController();
   final _textControllerPassword = TextEditingController();
   final _textControllerConfirPassword = TextEditingController();
+
+  final _formatWhatsappNumber = MaskTextInputFormatter(
+    mask: "(##) # ####-####",
+    filter: {"#": RegExp(r'[0-9]')},
+  );
 
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPassword = true;
@@ -133,6 +139,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                           icon: Icons.phone,
                           label: "Whatsapp",
                           textController: _textControllerWhatsapp,
+                          format: [_formatWhatsappNumber],
                         ),
                         InputFormWidget(
                           keyboardType: TextInputType.text,

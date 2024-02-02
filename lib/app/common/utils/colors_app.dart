@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ColorsApp {
   static const Color white = Color(0xFFFFFFFF);
   static const Color blue = Color(0xFF004FB5);
+  static const Color purple = Color(0xFFCE03C6);
   static const Color red = Color(0xFFCE2915);
   static const Color black = Color(0xFF000000);
   static const Color green200 = Color(0xFF236320);
@@ -21,4 +22,9 @@ class ColorsApp {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const linearGradientBorder = LinearGradient(colors: [
+    green100,
+    purple,
+  ]);
 }
