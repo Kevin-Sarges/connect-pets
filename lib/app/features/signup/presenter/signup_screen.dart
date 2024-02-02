@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
@@ -13,6 +15,9 @@ import 'package:connect_pets/app/features/signup/presenter/cubit/signup_state.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -31,9 +36,16 @@ class _SignupScreenState extends State<SignupScreen> {
   final _textControllerPassword = TextEditingController();
   final _textControllerConfirmPassword = TextEditingController();
 
+  final _colorBg = ColorsApp.green50;
+  final _formatWhatsappNumber = MaskTextInputFormatter(
+    mask: "(##) # ####-####",
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPassword = true;
   bool _clickButton = false;
+  File? _selectedFile;
 
   void _hiddenPassword() {
     setState(() {
@@ -47,10 +59,26 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  void _creatUserEmailPassword() {
+  Future<XFile?> _getImage() async {
+    final picker = ImagePicker();
+    final image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _selectedFile = File(image.path);
+      });
+
+      return image;
+    }
+
+    return null;
+  }
+
+  void _creatUserEmailPassword() async {
     final whatsappValue = int.parse(_textControllerNumberPhone.text);
 
-    if (_textControllerPassword.text != _textControllerConfirmPassword.text) {
+    if (_textControllerPassword.text != _textControllerConfirmPassword.text ||
+        _selectedFile == null) {
       setState(() {
         _clickButton = false;
       });
@@ -66,6 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
         _cubit.signupUserEmailPassword(
           UserModel(
+            imageUser: _selectedFile?.path,
             cityUser: _textControllerCity.text,
             emailUser: _textControllerEmail.text,
             nameUser: _textControllerUserName.text,
@@ -90,7 +119,22 @@ class _SignupScreenState extends State<SignupScreen> {
     final w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: ColorsApp.green50,
+      backgroundColor: _colorBg,
+      appBar: AppBar(
+        title: const Text("Cadastro"),
+        centerTitle: true,
+        backgroundColor: _colorBg,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RoutesApp.initialPage,
+              (_) => false,
+            );
+          },
+        ),
+      ),
       body: SafeArea(
         child: BlocListener<SignupCubit, SignupState>(
           listener: (context, state) {
@@ -134,19 +178,55 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Você pode escolher a forma\nde criar sua conta, vai da\nsua preferência.",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 23),
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
+                        Container(
+                          width: 110,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            border: const GradientBoxBorder(
+                              gradient: ColorsApp.linearGradientBorder,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(999),
+                            color: ColorsApp.white,
+                            image: _selectedFile != null
+                                ? DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: FileImage(
+                                      _selectedFile!,
+                                      scale: 1,
+                                    ),
+                                  )
+                                : null,
+                          ),
+                          child: _selectedFile == null
+                              ? IconButton(
+                                  icon: const Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.edit,
+                                        color: ColorsApp.green100,
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        "Foto Perfil",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: ColorsApp.green100,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: () => _getImage(),
+                                )
+                              : null,
+                        ),
                         InputFormWidget(
                           keyboardType: TextInputType.name,
                           icon: Icons.person,
@@ -158,6 +238,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           icon: Icons.call,
                           label: "Numero do whatsapp",
                           textController: _textControllerNumberPhone,
+                          format: [_formatWhatsappNumber],
                         ),
                         InputFormWidget(
                           keyboardType: TextInputType.text,
@@ -196,7 +277,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 23),
+                  const SizedBox(height: 15),
                   ButtonGlobalWidget(
                     buttonStyle: _clickButton
                         ? ButtonStyle(
@@ -233,7 +314,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 30),
                   const DividerWidget(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

@@ -22,6 +22,7 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _textControllerEmail = TextEditingController();
 
+  final _colorBg = ColorsApp.green50;
   bool _clickButton = false;
 
   void _sendEmail() {
@@ -39,7 +40,22 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
     final w = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: ColorsApp.green50,
+      backgroundColor: _colorBg,
+      appBar: AppBar(
+        title: const Text("Recuperar Senha"),
+        centerTitle: true,
+        backgroundColor: _colorBg,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              RoutesApp.login,
+                  (_) => false,
+            );
+          },
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -81,15 +97,6 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Informe o seu e-mail da sua\nconta e nós enviaremos um\nlink para recuperação de\nsenha.",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 132),
                 Form(
                   key: _formKey,
                   child: InputFormWidget(
@@ -104,34 +111,34 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
                   width: _clickButton ? 100 : w,
                   buttonStyle: _clickButton
                       ? ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.symmetric(
-                        vertical: 15,
-                      ),
-                    ),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(99),
-                      ),
-                    ),
-                  )
+                          padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(
+                              vertical: 15,
+                            ),
+                          ),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(99),
+                            ),
+                          ),
+                        )
                       : ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 48,
-                      vertical: 15,
-                    ),
-                    backgroundColor: ColorsApp.green100,
-                  ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 48,
+                            vertical: 15,
+                          ),
+                          backgroundColor: ColorsApp.green100,
+                        ),
                   onPressed: _clickButton ? null : () => _sendEmail(),
                   child: _clickButton
                       ? const ProgressIndicatorWidget()
                       : const Text(
-                    "Enviar",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: ColorsApp.white,
-                    ),
-                  ),
+                          "Enviar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ColorsApp.white,
+                          ),
+                        ),
                 ),
               ],
             ),
