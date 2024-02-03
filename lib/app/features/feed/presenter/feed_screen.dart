@@ -12,9 +12,20 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: ColorsApp.blue,
+      appBar: AppBar(
+        title: const Text(
+          "Connect Pets",
+          style: TextStyle(
+            color: ColorsApp.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            fontFamily: "Tienne",
+          ),
+        ),
       ),
+      backgroundColor: ColorsApp.grey50,
+      body: Container(),
+
     );
   }
 }
