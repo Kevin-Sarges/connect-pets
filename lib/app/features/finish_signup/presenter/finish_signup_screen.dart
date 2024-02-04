@@ -198,7 +198,9 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                     onPressed:
                         _clickButton ? null : () => _creatUserEmailPassword(),
                     child: _clickButton
-                        ? const ProgressIndicatorWidget()
+                        ? const ProgressIndicatorWidget(
+                            color: ColorsApp.white,
+                          )
                         : const Text(
                             "Criar Conta",
                             style: TextStyle(

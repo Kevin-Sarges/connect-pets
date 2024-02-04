@@ -302,7 +302,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         _clickButton ? null : () => _creatUserEmailPassword(),
                     width: _clickButton ? 100 : w,
                     child: _clickButton
-                        ? const ProgressIndicatorWidget()
+                        ? const ProgressIndicatorWidget(
+                            color: ColorsApp.white,
+                          )
                         : const Text(
                             "Criar Conta",
                             style: TextStyle(

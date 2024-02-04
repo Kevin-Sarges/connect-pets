@@ -1,15 +1,17 @@
-import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:flutter/material.dart';
 
 class ProgressIndicatorWidget extends StatelessWidget {
   const ProgressIndicatorWidget({
     super.key,
+    required this.color,
   });
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator(
-      color: ColorsApp.grey50,
+    return CircularProgressIndicator(
+      color: color,
     );
   }
 }
