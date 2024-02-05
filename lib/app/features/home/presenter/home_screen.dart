@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               bottomNavigationBar: ConvexAppBar(
                 onTap: _onScreenTapped,
                 backgroundColor: ColorsApp.green50,
-                initialActiveIndex: 1,
+                initialActiveIndex: 0,
                 curveSize: 80,
                 top: -20,
                 color: ColorsApp.green100,
