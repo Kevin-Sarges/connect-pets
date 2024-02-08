@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -66,6 +68,15 @@ class _FeedScreenState extends State<FeedScreen> {
       RoutesApp.login,
       (_) => true,
     );
+  }
+
+  void _launchWhatsAppUri(String whatsapp) async {
+    final link = WhatsAppUnilink(
+      phoneNumber: '+55 - $whatsapp',
+      text: 'Olá, tenho interesse em adotar o pet🤗'
+    );
+
+    await launchUrl(link.asUri());
   }
 
   @override
@@ -245,7 +256,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                 const SizedBox(width: 7),
                                 ElevatedButton(
                                   onPressed: () {
-                                    print(post[index].whatsapp);
+                                    _launchWhatsAppUri(post[index].whatsapp.toString());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: ColorsApp.green100,
