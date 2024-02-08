@@ -51,7 +51,7 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               RoutesApp.login,
-                  (_) => false,
+              (_) => false,
             );
           },
         ),
@@ -131,7 +131,9 @@ class _RefactorPasswordScreenState extends State<RefactorPasswordScreen> {
                         ),
                   onPressed: _clickButton ? null : () => _sendEmail(),
                   child: _clickButton
-                      ? const ProgressIndicatorWidget()
+                      ? const ProgressIndicatorWidget(
+                          color: ColorsApp.white,
+                        )
                       : const Text(
                           "Enviar",
                           style: TextStyle(

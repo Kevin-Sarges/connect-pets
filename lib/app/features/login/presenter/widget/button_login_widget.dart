@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,9 @@ class ButtonLoginWidget extends StatelessWidget {
                 ),
               )),
       child: clickButton
-          ? const ProgressIndicatorWidget()
+          ? const ProgressIndicatorWidget(
+              color: ColorsApp.white,
+            )
           : Image.asset(
               image,
               width: 30,

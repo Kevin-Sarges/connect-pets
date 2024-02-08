@@ -1,4 +1,5 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
+import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/doar/presenter/doar_screen.dart';
 import 'package:connect_pets/app/features/feed/presenter/feed_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_cubit.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,9 +19,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _controller = PersistentTabController();
   final _cubit = GetIt.I.get<HomeCubit>();
   final _uid = FirebaseAuth.instance.currentUser?.uid;
+
+  int _selectedScreenIndex = 0;
 
   @override
   void initState() {
@@ -29,74 +31,63 @@ class _HomeScreenState extends State<HomeScreen> {
     _cubit.userDetails(_uid!);
   }
 
-  List<Widget> _buildScreens() {
-    return const [
-      FeedScreen(),
-      DoarScreen(),
-      PerfilScreen(),
-    ];
-  }
+  final _buildScreens = [
+    const FeedScreen(),
+    const DoarScreen(),
+    const PerfilScreen(),
+  ];
 
-  List<PersistentBottomNavBarItem> _navBarsItems({required String nameUser}) {
-    return [
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.home),
-        title: ("Feed"),
-        activeColorPrimary: ColorsApp.green100,
-        inactiveColorPrimary: ColorsApp.black,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(
-          Icons.add,
-          color: ColorsApp.white,
-        ),
-        title: ("Doar"),
-        activeColorPrimary: ColorsApp.green100,
-        inactiveColorPrimary: ColorsApp.black,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.person),
-        title: (nameUser),
-        activeColorPrimary: ColorsApp.green100,
-        inactiveColorPrimary: ColorsApp.black,
-      ),
-    ];
+  void _onScreenTapped(int index) {
+    setState(() {
+      _selectedScreenIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        bottomNavigationBar: BlocBuilder<HomeCubit, HomeState>(
-          bloc: _cubit,
-          builder: (context, state) {
-            if (state is HomeSuccess) {
-              return PersistentTabView(
-                context,
-                controller: _controller,
-                screens: _buildScreens(),
-                items: _navBarsItems(
-                  nameUser: state.user.nameUser.toString(),
-                ),
-                backgroundColor: ColorsApp.green50,
-                decoration: const NavBarDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                  ),
-                ),
-                screenTransitionAnimation: const ScreenTransitionAnimation(
-                  animateTabTransition: true,
-                  curve: Curves.linear,
-                  duration: Duration(milliseconds: 200),
-                ),
-                navBarStyle: NavBarStyle.style15,
-              );
-            }
+      child: BlocBuilder<HomeCubit, HomeState>(
+        bloc: _cubit,
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return const Center(
+              child: ProgressIndicatorWidget(
+                color: ColorsApp.green100,
+              ),
+            );
+          }
 
-            return Container();
-          },
-        ),
+          if (state is HomeError) {
+            return const Center(
+              child: Text("Erro desconhecido"),
+            );
+          }
+
+          if (state is HomeSuccess) {
+            final user = state.user;
+
+            return Scaffold(
+              body: _buildScreens.elementAt(_selectedScreenIndex),
+              bottomNavigationBar: ConvexAppBar(
+                onTap: _onScreenTapped,
+                backgroundColor: ColorsApp.green50,
+                initialActiveIndex: 0,
+                curveSize: 80,
+                top: -20,
+                color: ColorsApp.green100,
+                style: TabStyle.reactCircle,
+                activeColor: ColorsApp.green100,
+                items: [
+                  const TabItem(icon: Icons.home_filled, title: 'Feed',),
+                  const TabItem(icon: Icons.add_a_photo_rounded, title: 'Postar'),
+                  TabItem(icon: Icons.person, title: user.nameUser),
+                ],
+              ),
+            );
+          }
+
+          return Container();
+        },
       ),
     );
   }

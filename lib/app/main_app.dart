@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Connect pet',
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
       routes: {
         RoutesApp.root: (context) => const SplashScreen(),
         RoutesApp.initialPage: (context) => const InitScreen(),

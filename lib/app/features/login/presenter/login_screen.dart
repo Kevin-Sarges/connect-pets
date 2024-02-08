@@ -197,7 +197,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           child: _clickButton
-                              ? const ProgressIndicatorWidget()
+                              ? const ProgressIndicatorWidget(
+                                  color: ColorsApp.white,
+                                )
                               : const Text(
                                   "Entrar",
                                   style: TextStyle(
