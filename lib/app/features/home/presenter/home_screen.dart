@@ -1,6 +1,6 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
-import 'package:connect_pets/app/features/doar/presenter/doar_screen.dart';
+import 'package:connect_pets/app/features/donate/presenter/donate_screen.dart';
 import 'package:connect_pets/app/features/feed/presenter/feed_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_cubit.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_state.dart';
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final _buildScreens = [
     const FeedScreen(),
-    const DoarScreen(),
+    const DonateScreen(),
     const PerfilScreen(),
   ];
 
