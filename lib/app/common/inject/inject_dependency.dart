@@ -1,3 +1,4 @@
+import 'package:connect_pets/app/features/donate/utils/inject/donate_inject_dependency.dart';
 import 'package:connect_pets/app/features/feed/utils/inject/feed_inject_dependency.dart';
 import 'package:connect_pets/app/features/finish_signup/utils/inject/finish_inject_dependency.dart';
 import 'package:connect_pets/app/features/home/utils/inject/home_inject_dependency.dart';
@@ -18,5 +19,6 @@ class InjectDependency {
     RefactorPasswordInjectDependency.init(getIt);
     HomeInjectDependency.init(getIt);
     FeedInjectDependency.init(getIt);
+    DonateInjectDependency.init(getIt);
   }
 }
