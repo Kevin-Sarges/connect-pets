@@ -10,7 +10,7 @@ class PostEntity extends Equatable {
   final String? userId;
   final String? nameUser;
   final String? photoUser;
-  final int? whatsapp;
+  final String? whatsapp;
 
   const PostEntity({
     this.id,

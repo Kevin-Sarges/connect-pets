@@ -7,7 +7,7 @@ import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/donate/presenter/cubit/donate_cubit.dart';
 import 'package:connect_pets/app/features/donate/presenter/cubit/donate_state.dart';
 import 'package:connect_pets/app/features/donate/utils/items_drop_down_menu.dart';
-import 'package:connect_pets/app/features/feed/presenter/feed_screen.dart';
+import 'package:connect_pets/app/features/home/presenter/home_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +63,7 @@ class _DoarScreenState extends State<DonateScreen> {
     return null;
   }
 
-  void postDonate() {
+  void _postDonate() {
     setState(() {
       _clickButton = true;
 
@@ -100,7 +100,17 @@ class _DoarScreenState extends State<DonateScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const FeedScreen(),
+                builder: (context) => const HomeScreen(),
+              ),
+            );
+
+            setState(() {
+              _selectedFile = null;
+            });
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Postado com sucesso 🤗"),
               ),
             );
 
@@ -233,12 +243,14 @@ class _DoarScreenState extends State<DonateScreen> {
                     hintText: "Selecione o gênero",
                     controller: _textControllerDropdown,
                     inputDecorationTheme: const InputDecorationTheme(
-                        filled: true,
-                        fillColor: ColorsApp.white,
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                      filled: true,
+                      fillColor: ColorsApp.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
                           color: ColorsApp.green100,
-                        ))),
+                        ),
+                      ),
+                    ),
                     dropdownMenuEntries: items.map(
                       (item) {
                         return DropdownMenuEntry(
@@ -247,6 +259,7 @@ class _DoarScreenState extends State<DonateScreen> {
                         );
                       },
                     ).toList(),
+                    menuHeight: 200,
                     onSelected: (String? item) {
                       setState(() {
                         _selectedItem = item;
@@ -274,7 +287,7 @@ class _DoarScreenState extends State<DonateScreen> {
                             ),
                             backgroundColor: ColorsApp.green100,
                           ),
-                    onPressed: _clickButton ? null : () {},
+                    onPressed: _clickButton ? null : _postDonate,
                     width: _clickButton ? 100 : width,
                     child: _clickButton
                         ? const ProgressIndicatorWidget(

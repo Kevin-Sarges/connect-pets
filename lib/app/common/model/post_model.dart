@@ -25,7 +25,7 @@ class PostModel extends PostEntity {
       userId: json['user_id'] as String,
       nameUser: json['name_user'] as String,
       photoUser: json['photo_user'] as String,
-      whatsapp: json['whatsapp'] as int,
+      whatsapp: json['whatsapp'] as String,
     );
   }
 

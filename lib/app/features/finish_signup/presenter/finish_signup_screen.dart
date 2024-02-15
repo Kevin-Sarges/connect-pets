@@ -50,8 +50,6 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   }
 
   void _creatUserEmailPassword() {
-    final whatsappValue = int.parse(_textControllerWhatsapp.text);
-
     if (_textControllerPassword.text == _textControllerConfirPassword.text) {
       setState(() {
         _clickButton = true;
@@ -61,7 +59,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
             cityUser: _textControllerCity.text,
             nameUser: _textControllerNameUser.text,
             passwordUser: _textControllerPassword.text,
-            whatsappUser: whatsappValue,
+            whatsappUser: _textControllerWhatsapp.text,
           ),
         );
       });

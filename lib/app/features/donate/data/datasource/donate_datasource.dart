@@ -20,6 +20,7 @@ class DonateDatasource implements DonateDatasourceImpl {
   @override
   Future<void> donatePetPost(PostModel post) async {
     try {
+      final regExp = RegExp(r"[()]");
       final userId = _auth.currentUser?.uid;
       final imageFile = File(post.urlImage ?? "");
       final ref =
@@ -42,19 +43,19 @@ class DonateDatasource implements DonateDatasourceImpl {
         final data = e.data();
 
         return data['name_user'];
-      }).toString();
+      }).toString().replaceAll(regExp, '');
 
       final photoUser = user.docs.map((e) {
         final data = e.data();
 
         return data['image_user'];
-      }).toString();
+      }).toString().replaceAll(regExp, '');
 
       final whatsapp = user.docs.map((e) {
         final data = e.data();
 
         return data['whatsapp_user'];
-      }).toString();
+      }).toString().replaceAll(regExp, '');
 
       if (userId != null) {
         await _firebase.collection("posts").doc().set({
@@ -63,6 +64,7 @@ class DonateDatasource implements DonateDatasourceImpl {
           'gender_pet': post.genderPet,
           'url_image': imageUrl,
           'created_at': secondsSinceEpoch,
+          'updated_at': secondsSinceEpoch,
           'user_id': userId,
           'name_user': nameUser,
           'photo_user': photoUser,

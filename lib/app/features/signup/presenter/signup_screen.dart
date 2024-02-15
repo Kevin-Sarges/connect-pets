@@ -75,8 +75,6 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _creatUserEmailPassword() async {
-    final whatsappValue = int.parse(_textControllerNumberPhone.text);
-
     if (_textControllerPassword.text != _textControllerConfirmPassword.text ||
         _selectedFile == null) {
       setState(() {
@@ -99,7 +97,7 @@ class _SignupScreenState extends State<SignupScreen> {
             emailUser: _textControllerEmail.text,
             nameUser: _textControllerUserName.text,
             passwordUser: _textControllerPassword.text,
-            whatsappUser: whatsappValue,
+            whatsappUser: _textControllerNumberPhone.text,
           ),
         );
       });

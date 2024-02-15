@@ -14,7 +14,7 @@ UserEntity Function() tUserEntity = () => const UserEntity(
       idUser: "flaheif4f4ifa5ds4fa6sdfa6sd4fa",
       nameUser: "Kevin Sarges",
       passwordUser: "412341351363547354",
-      whatsappUser: 91985206041,
+      whatsappUser: "91985206041",
     );
 
 UserModel Function() tUserModel = () => const UserModel(
@@ -23,7 +23,7 @@ UserModel Function() tUserModel = () => const UserModel(
       idUser: "flaheif4f4ifa5ds4fa6sdfa6sd4fa",
       nameUser: "Kevin Sarges",
       passwordUser: "412341351363547354",
-      whatsappUser: 91985206041,
+      whatsappUser: "91985206041",
     );
 
 class MockUserCredential extends Mock implements UserCredential {}
