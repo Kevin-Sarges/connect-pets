@@ -4,6 +4,7 @@ import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/utils/strings_app.dart';
 import 'package:connect_pets/app/common/widgets/button_global_widget.dart';
 import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
 import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
@@ -36,6 +37,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _textControllerPassword = TextEditingController();
   final _textControllerConfirmPassword = TextEditingController();
 
+  final _items = StringsApp.listCity;
   final _colorBg = ColorsApp.green50;
   final _formatWhatsappNumber = MaskTextInputFormatter(
     mask: "(##) # ####-####",
@@ -46,6 +48,7 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _isHiddenConfirmPassword = true;
   bool _clickButton = false;
   File? _selectedFile;
+  String? _selectedItem;
 
   void _hiddenPassword() {
     setState(() {
@@ -93,7 +96,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _cubit.signupUserEmailPassword(
           UserModel(
             imageUser: _selectedFile?.path,
-            cityUser: _textControllerCity.text,
+            cityUser: _selectedItem,
             emailUser: _textControllerEmail.text,
             nameUser: _textControllerUserName.text,
             passwordUser: _textControllerPassword.text,
@@ -238,11 +241,45 @@ class _SignupScreenState extends State<SignupScreen> {
                           textController: _textControllerNumberPhone,
                           format: [_formatWhatsappNumber],
                         ),
-                        InputFormWidget(
-                          keyboardType: TextInputType.text,
-                          icon: Icons.location_city,
-                          label: "Sua cidade",
-                          textController: _textControllerCity,
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_city_rounded,
+                              color: ColorsApp.green100,
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: DropdownMenu(
+                                width: w * 0.81,
+                                hintText: "Selecione a Cidade",
+                                label: const Text(
+                                  "Cidade",
+                                  style: TextStyle(
+                                    color: ColorsApp.green100,
+                                  ),
+                                ),
+                                controller: _textControllerCity,
+                                inputDecorationTheme:
+                                    const InputDecorationTheme(
+                                  filled: true,
+                                  fillColor: ColorsApp.green50,
+                                ),
+                                dropdownMenuEntries: _items.map(
+                                  (item) {
+                                    return DropdownMenuEntry(
+                                      value: item,
+                                      label: item,
+                                    );
+                                  },
+                                ).toList(),
+                                onSelected: (String? item) {
+                                  setState(() {
+                                    _selectedItem = item;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         InputFormWidget(
                           keyboardType: TextInputType.emailAddress,
@@ -296,8 +333,13 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             backgroundColor: ColorsApp.green100,
                           ),
-                    onPressed:
-                        _clickButton ? null : () => _creatUserEmailPassword(),
+                    onPressed: _clickButton
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              _creatUserEmailPassword();
+                            }
+                          },
                     width: _clickButton ? 100 : w,
                     child: _clickButton
                         ? const ProgressIndicatorWidget(

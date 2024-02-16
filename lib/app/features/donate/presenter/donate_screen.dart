@@ -216,6 +216,13 @@ class _DoarScreenState extends State<DonateScreen> {
                     key: _formKey,
                     child: TextFormField(
                       controller: _textControllerInput,
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Campo esta vazio';
+                        }
+
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         filled: true,
                         fillColor: ColorsApp.white,
@@ -287,7 +294,13 @@ class _DoarScreenState extends State<DonateScreen> {
                             ),
                             backgroundColor: ColorsApp.green100,
                           ),
-                    onPressed: _clickButton ? null : _postDonate,
+                    onPressed: _clickButton
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              _postDonate();
+                            }
+                          },
                     width: _clickButton ? 100 : width,
                     child: _clickButton
                         ? const ProgressIndicatorWidget(
