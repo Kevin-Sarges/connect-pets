@@ -1,4 +1,5 @@
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/utils/strings_app.dart';
 import 'package:connect_pets/app/features/finish_signup/presenter/finish_signup_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/home_screen.dart';
 import 'package:connect_pets/app/features/init/init.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Connect pet',
+      title: StringsApp.nameApp,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
