@@ -256,7 +256,7 @@ class _FeedScreenState extends State<FeedScreen> {
                                 const SizedBox(width: 7),
                                 ElevatedButton(
                                   onPressed: () {
-                                    _launchWhatsAppUri(post[index].whatsapp.toString());
+                                    _launchWhatsAppUri(post[index].whatsapp!);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: ColorsApp.green100,
