@@ -33,7 +33,7 @@ class SignupDatasource implements SignupDatasourceImpl {
       final imageUrl = await saveImage.ref.getDownloadURL();
 
       if (user != null) {
-        await _fireFirestore.collection("users").doc().set({
+        await _fireFirestore.collection("users").doc(user.uid).set({
           'id_user': user.uid,
           'image_user': imageUrl,
           'city_user': userModel.cityUser,

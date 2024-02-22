@@ -23,7 +23,7 @@ class FinishDataSource implements FinishDataSourceImpl {
         throw CommonNoDataFoundError(message: "Senha Invalida");
       }
 
-      await _fireStore.collection("users").doc().set({
+      await _fireStore.collection("users").doc(uid).set({
         'id_user': uid,
         'image_user': imageUrl,
         'city_user': user.cityUser,
