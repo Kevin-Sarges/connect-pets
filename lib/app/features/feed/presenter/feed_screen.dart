@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
 import 'package:connect_pets/app/common/widgets/empty_post_list_widget.dart';
+import 'package:connect_pets/app/common/widgets/error_screen_widget.dart';
 import 'package:connect_pets/app/features/feed/presenter/cubit/feed_cubit.dart';
 import 'package:connect_pets/app/features/feed/presenter/cubit/feed_state.dart';
 import 'package:connect_pets/app/features/feed/presenter/widgets/info_pet_widget.dart';
@@ -72,9 +73,8 @@ class _FeedScreenState extends State<FeedScreen> {
 
   void _launchWhatsAppUri(String whatsapp) async {
     final link = WhatsAppUnilink(
-      phoneNumber: '+55 - $whatsapp',
-      text: 'Olá, tenho interesse em adotar o pet🤗'
-    );
+        phoneNumber: '+55 - $whatsapp',
+        text: 'Olá, tenho interesse em adotar o pet🤗');
 
     await launchUrl(link.asUri());
   }
@@ -113,8 +113,8 @@ class _FeedScreenState extends State<FeedScreen> {
           }
 
           if (state is FeedError) {
-            return Center(
-              child: Text(state.error.errorMessage),
+            return const ErrorScreenWidget(
+              messageError: "Erro ao tentar\nlista as postagens 😬",
             );
           }
 
@@ -129,7 +129,8 @@ class _FeedScreenState extends State<FeedScreen> {
                 color: ColorsApp.green100,
                 child: ListView.separated(
                   itemCount: post.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 7),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 7),
                   itemBuilder: (context, index) {
                     return Container(
                       width: width,
@@ -151,17 +152,19 @@ class _FeedScreenState extends State<FeedScreen> {
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(999),
+                                        borderRadius:
+                                            BorderRadius.circular(999),
                                       ),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(999),
+                                        borderRadius:
+                                            BorderRadius.circular(999),
                                         child: CachedNetworkImage(
                                           fit: BoxFit.cover,
                                           imageUrl: post[index].photoUser!,
                                           placeholder: (context, url) =>
                                               Shimmer.fromColors(
-                                            baseColor: ColorsApp.grey150,
-                                            highlightColor: ColorsApp.white,
+                                            baseColor: ColorsApp.grey100,
+                                            highlightColor: ColorsApp.grey50,
                                             child: Container(
                                               width: 50,
                                               height: 50,
@@ -209,8 +212,8 @@ class _FeedScreenState extends State<FeedScreen> {
                             imageUrl: post[index].urlImage!,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: ColorsApp.grey150,
-                              highlightColor: ColorsApp.white,
+                              baseColor: ColorsApp.grey100,
+                              highlightColor: ColorsApp.grey50,
                               child: Container(
                                 width: width,
                                 height: 400,

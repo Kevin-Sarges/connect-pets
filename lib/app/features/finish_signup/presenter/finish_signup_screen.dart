@@ -1,10 +1,11 @@
 import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/utils/strings_app.dart';
 import 'package:connect_pets/app/common/widgets/button_global_widget.dart';
-import 'package:connect_pets/app/common/widgets/input_form_widget.dart';
-import 'package:connect_pets/app/common/widgets/input_password_widget.dart';
-import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
+import 'package:connect_pets/app/common/widgets/inputs_widgets/input_form_widget.dart';
+import 'package:connect_pets/app/common/widgets/inputs_widgets/input_password_widget.dart';
+import 'package:connect_pets/app/common/widgets/loading_widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/finish_signup/presenter/cubit/finish_cubit.dart';
 import 'package:connect_pets/app/features/finish_signup/presenter/cubit/finish_state.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   final _textControllerPassword = TextEditingController();
   final _textControllerConfirPassword = TextEditingController();
 
+  final _items = StringsApp.listCity;
   final _formatWhatsappNumber = MaskTextInputFormatter(
     mask: "(##) # ####-####",
     filter: {"#": RegExp(r'[0-9]')},
@@ -36,6 +38,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
   bool _isHiddenPassword = true;
   bool _isHiddenConfirmPassword = true;
   bool _clickButton = false;
+  String? _selectedItem;
 
   void _hiddenPassword() {
     setState(() {
@@ -56,7 +59,7 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
 
         _cubit.finishSignupUser(
           UserModel(
-            cityUser: _textControllerCity.text,
+            cityUser: _selectedItem,
             nameUser: _textControllerNameUser.text,
             passwordUser: _textControllerPassword.text,
             whatsappUser: _textControllerWhatsapp.text,
@@ -139,11 +142,45 @@ class _FinishSignupScreenState extends State<FinishSignupScreen> {
                           textController: _textControllerWhatsapp,
                           format: [_formatWhatsappNumber],
                         ),
-                        InputFormWidget(
-                          keyboardType: TextInputType.text,
-                          icon: Icons.location_city,
-                          label: "Cidade",
-                          textController: _textControllerCity,
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_city_rounded,
+                              color: ColorsApp.green100,
+                            ),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: DropdownMenu(
+                                width: w * 0.81,
+                                hintText: "Selecione a Cidade",
+                                label: const Text(
+                                  "Cidade",
+                                  style: TextStyle(
+                                    color: ColorsApp.green100,
+                                  ),
+                                ),
+                                controller: _textControllerCity,
+                                inputDecorationTheme:
+                                const InputDecorationTheme(
+                                  filled: true,
+                                  fillColor: ColorsApp.green50,
+                                ),
+                                dropdownMenuEntries: _items.map(
+                                      (item) {
+                                    return DropdownMenuEntry(
+                                      value: item,
+                                      label: item,
+                                    );
+                                  },
+                                ).toList(),
+                                onSelected: (String? item) {
+                                  setState(() {
+                                    _selectedItem = item;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         InputPasswordWidget(
                           textEditingController: _textControllerPassword,

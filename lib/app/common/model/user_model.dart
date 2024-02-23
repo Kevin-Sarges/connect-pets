@@ -18,7 +18,7 @@ class UserModel extends UserEntity {
       cityUser: json['city_user'] as String,
       emailUser: json['email_user'] as String,
       nameUser: json['name_user'] as String,
-      passwordUser: json['password_user'] as String,
+      passwordUser: json['password_user'] as String?,
       whatsappUser: json['whatsapp_user'] as String,
     );
   }
