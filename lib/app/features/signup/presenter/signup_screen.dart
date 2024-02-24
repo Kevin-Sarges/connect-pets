@@ -231,7 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         InputFormWidget(
                           keyboardType: TextInputType.name,
                           icon: Icons.person,
-                          label: "Nome de usuário",
+                          label: "Seu nome e sobrenomes",
                           textController: _textControllerUserName,
                         ),
                         InputFormWidget(

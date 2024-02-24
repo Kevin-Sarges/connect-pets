@@ -108,7 +108,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   ColorsApp.green100,
                 ),
               ),
-              onPressed: () {
+              onPressed: _selectedFile == null ? null : () {
                 _cubit.newImage(_uid!, _selectedFile?.path);
 
                 Navigator.pop(context);
