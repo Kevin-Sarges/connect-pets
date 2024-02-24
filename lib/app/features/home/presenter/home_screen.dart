@@ -1,5 +1,6 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
-import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
+import 'package:connect_pets/app/common/widgets/error_screen_widget.dart';
+import 'package:connect_pets/app/common/widgets/loading_widgets/loading_screen_widget.dart';
 import 'package:connect_pets/app/features/donate/presenter/donate_screen.dart';
 import 'package:connect_pets/app/features/feed/presenter/feed_screen.dart';
 import 'package:connect_pets/app/features/home/presenter/cubit/home_cubit.dart';
@@ -50,16 +51,18 @@ class _HomeScreenState extends State<HomeScreen> {
         bloc: _cubit,
         builder: (context, state) {
           if (state is HomeLoading) {
-            return const Center(
-              child: ProgressIndicatorWidget(
-                color: ColorsApp.green100,
-              ),
+            return const Scaffold(
+              backgroundColor: ColorsApp.white,
+              body: LoadingScreenWidget(),
             );
           }
 
           if (state is HomeError) {
-            return const Center(
-              child: Text("Erro desconhecido"),
+            return const Scaffold(
+              backgroundColor: ColorsApp.white,
+              body: ErrorScreenWidget(
+                messageError: "Erro nos dados do app 😬",
+              ),
             );
           }
 
@@ -78,8 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TabStyle.reactCircle,
                 activeColor: ColorsApp.green100,
                 items: [
-                  const TabItem(icon: Icons.home_filled, title: 'Feed',),
-                  const TabItem(icon: Icons.add_a_photo_rounded, title: 'Postar'),
+                  const TabItem(
+                    icon: Icons.home_filled,
+                    title: 'Feed',
+                  ),
+                  const TabItem(
+                      icon: Icons.add_a_photo_rounded, title: 'Postar'),
                   TabItem(icon: Icons.person, title: user.nameUser),
                 ],
               ),

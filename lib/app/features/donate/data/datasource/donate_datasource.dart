@@ -39,26 +39,35 @@ class DonateDatasource implements DonateDatasourceImpl {
           .where("id_user", isEqualTo: userId)
           .get();
 
-      final nameUser = user.docs.map((e) {
-        final data = e.data();
+      final nameUser = user.docs
+          .map((e) {
+            final data = e.data();
 
-        return data['name_user'];
-      }).toString().replaceAll(regExp, '');
+            return data['name_user'];
+          })
+          .toString()
+          .replaceAll(regExp, '');
 
-      final photoUser = user.docs.map((e) {
-        final data = e.data();
+      final photoUser = user.docs
+          .map((e) {
+            final data = e.data();
 
-        return data['image_user'];
-      }).toString().replaceAll(regExp, '');
+            return data['image_user'];
+          })
+          .toString()
+          .replaceAll(regExp, '');
 
-      final whatsapp = user.docs.map((e) {
-        final data = e.data();
+      final whatsapp = user.docs
+          .map((e) {
+            final data = e.data();
 
-        return data['whatsapp_user'];
-      }).toString().replaceAll(regExp, '');
+            return data['whatsapp_user'];
+          })
+          .toString()
+          .replaceAll(regExp, '');
 
       if (userId != null) {
-        await _firebase.collection("posts").doc().set({
+        await _firebase.collection("posts").doc(_postId).set({
           'id': _postId,
           'age_pet': post.agePet,
           'gender_pet': post.genderPet,

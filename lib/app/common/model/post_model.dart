@@ -44,7 +44,7 @@ class PostModel extends PostEntity {
     };
   }
 
-  List<PostEntity> fromJsonList(List list) {
+  static List<PostEntity> fromJsonList(List list) {
     return list.map((e) => PostModel.fromJson(e)).toList();
   }
 }

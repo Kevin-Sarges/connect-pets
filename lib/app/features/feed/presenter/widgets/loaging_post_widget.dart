@@ -26,8 +26,8 @@ class LoagingPostWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Shimmer.fromColors(
-                      baseColor: ColorsApp.grey150,
-                      highlightColor: ColorsApp.white,
+                      baseColor: ColorsApp.grey100,
+                      highlightColor: ColorsApp.grey50,
                       child: Container(
                         width: 50,
                         height: 50,
@@ -39,8 +39,8 @@ class LoagingPostWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 7),
                     Shimmer.fromColors(
-                      baseColor: ColorsApp.grey150,
-                      highlightColor: ColorsApp.white,
+                      baseColor: ColorsApp.grey100,
+                      highlightColor: ColorsApp.grey50,
                       child: Container(
                         width: 200,
                         height: 25,
@@ -54,8 +54,8 @@ class LoagingPostWidget extends StatelessWidget {
               ),
               const SizedBox(height: 9),
               Shimmer.fromColors(
-                baseColor: ColorsApp.grey150,
-                highlightColor: ColorsApp.white,
+                baseColor: ColorsApp.grey100,
+                highlightColor: ColorsApp.grey50,
                 child: Container(
                   width: width,
                   height: 400,
@@ -69,8 +69,8 @@ class LoagingPostWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Shimmer.fromColors(
-                      baseColor: ColorsApp.grey150,
-                      highlightColor: ColorsApp.white,
+                      baseColor: ColorsApp.grey100,
+                      highlightColor: ColorsApp.grey50,
                       child: Container(
                         width: 150,
                         height: 50,
@@ -82,8 +82,8 @@ class LoagingPostWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 7),
                     Shimmer.fromColors(
-                      baseColor: ColorsApp.grey150,
-                      highlightColor: ColorsApp.white,
+                      baseColor: ColorsApp.grey100,
+                      highlightColor: ColorsApp.grey50,
                       child: Container(
                         width: 100,
                         height: 40,

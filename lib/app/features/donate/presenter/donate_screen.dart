@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:connect_pets/app/common/model/post_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/widgets/button_global_widget.dart';
-import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
+import 'package:connect_pets/app/common/widgets/loading_widgets/progress_indicator_widget.dart';
 import 'package:connect_pets/app/features/donate/presenter/cubit/donate_cubit.dart';
 import 'package:connect_pets/app/features/donate/presenter/cubit/donate_state.dart';
 import 'package:connect_pets/app/features/donate/utils/items_drop_down_menu.dart';

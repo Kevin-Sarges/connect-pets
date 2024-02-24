@@ -1,5 +1,5 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
-import 'package:connect_pets/app/common/widgets/progress_indicator_widget.dart';
+import 'package:connect_pets/app/common/widgets/loading_widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 
 class ButtonLoginWidget extends StatelessWidget {
