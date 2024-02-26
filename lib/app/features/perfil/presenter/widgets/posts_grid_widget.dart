@@ -1,10 +1,12 @@
 import "package:cached_network_image/cached_network_image.dart";
+import "package:connect_pets/app/common/entity/post_entity.dart";
 import "package:connect_pets/app/common/utils/colors_app.dart";
 import "package:connect_pets/app/common/widgets/empty_post_list_widget.dart";
 import "package:connect_pets/app/common/widgets/error_screen_widget.dart";
 import "package:connect_pets/app/features/perfil/presenter/cubit/perfil_cubit.dart";
 import "package:connect_pets/app/features/perfil/presenter/cubit/perfil_state.dart";
 import "package:connect_pets/app/features/perfil/presenter/widgets/skeleton_posts_loading_widget.dart";
+import 'package:connect_pets/app/features/post/presenter/post_screen.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -26,6 +28,17 @@ class _PostsGridWidgetState extends State<PostsGridWidget> {
   void initState() {
     _cubit.postUser(_uid!);
     super.initState();
+  }
+
+  void _navigated(PostEntity post) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PostScreen(
+          post: post,
+        ),
+      ),
+    );
   }
 
   @override
@@ -58,20 +71,23 @@ class _PostsGridWidgetState extends State<PostsGridWidget> {
               crossAxisSpacing: 2,
               mainAxisSpacing: 2,
             ),
-            itemBuilder: (context, index) => CachedNetworkImage(
-              imageUrl: post[index].urlImage!,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Shimmer.fromColors(
-                baseColor: ColorsApp.grey100,
-                highlightColor: ColorsApp.grey50,
-                child: Container(
-                  color: ColorsApp.grey100,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () => _navigated(post[index]),
+              child: CachedNetworkImage(
+                imageUrl: post[index].urlImage!,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: ColorsApp.grey100,
+                  highlightColor: ColorsApp.grey50,
+                  child: Container(
+                    color: ColorsApp.grey100,
+                  ),
                 ),
-              ),
-              errorWidget: (context, url, error) => const Center(
-                child: Icon(
-                  Icons.error,
-                  color: ColorsApp.red,
+                errorWidget: (context, url, error) => const Center(
+                  child: Icon(
+                    Icons.error,
+                    color: ColorsApp.red,
+                  ),
                 ),
               ),
             ),
