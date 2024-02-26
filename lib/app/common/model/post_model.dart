@@ -1,7 +1,7 @@
 import 'package:connect_pets/app/common/entity/post_entity.dart';
 
 class PostModel extends PostEntity {
-  const PostModel({
+  PostModel({
     super.agePet,
     super.createdAt,
     super.genderPet,
@@ -12,7 +12,7 @@ class PostModel extends PostEntity {
     super.nameUser,
     super.photoUser,
     super.whatsapp,
-});
+  });
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     return PostModel(

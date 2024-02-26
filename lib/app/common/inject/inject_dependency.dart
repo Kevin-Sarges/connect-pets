@@ -4,6 +4,7 @@ import 'package:connect_pets/app/features/finish_signup/utils/inject/finish_inje
 import 'package:connect_pets/app/features/home/utils/inject/home_inject_dependency.dart';
 import 'package:connect_pets/app/features/login/utils/inject/login_inject_dependency.dart';
 import 'package:connect_pets/app/features/perfil/utils/inject/perfil_inject_dependency.dart';
+import 'package:connect_pets/app/features/post/utils/inject/post_inject_dependency.dart';
 import 'package:connect_pets/app/features/refactor_password/utils/inject/refactor_inject_dependency.dart';
 import 'package:connect_pets/app/features/signup/utils/inject/signup_inject_dependency.dart';
 import 'package:connect_pets/app/features/splash/utils/inject/splash_inject.dart';
@@ -22,5 +23,6 @@ class InjectDependency {
     FeedInjectDependency.init(getIt);
     DonateInjectDependency.init(getIt);
     PerfilInjectDependency.init(getIt);
+    PostInjectDependency.init(getIt);
   }
 }

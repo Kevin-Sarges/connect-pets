@@ -69,6 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is HomeSuccess) {
             final user = state.user;
 
+            final name = user.nameUser;
+            int limit = 10;
+            String ellipsis = "...";
+
+            String limitName = name!.substring(0, limit);
+
+            if(name.length > limit) {
+              limitName += ellipsis;
+            }
+
             return Scaffold(
               body: _buildScreens.elementAt(_selectedScreenIndex),
               bottomNavigationBar: ConvexAppBar(
@@ -86,8 +96,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: 'Feed',
                   ),
                   const TabItem(
-                      icon: Icons.add_a_photo_rounded, title: 'Postar'),
-                  TabItem(icon: Icons.person, title: user.nameUser),
+                    icon: Icons.add_a_photo_rounded,
+                    title: 'Postar',
+                  ),
+                  TabItem(
+                    icon: Icons.person,
+                    title: limitName,
+                  ),
                 ],
               ),
             );
