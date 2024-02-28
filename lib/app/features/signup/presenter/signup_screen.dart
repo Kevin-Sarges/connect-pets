@@ -78,8 +78,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _creatUserEmailPassword() async {
-    if (_textControllerPassword.text != _textControllerConfirmPassword.text ||
-        _selectedFile == null) {
+    if (_textControllerPassword.text != _textControllerConfirmPassword.text) {
       setState(() {
         _clickButton = false;
       });
@@ -87,6 +86,16 @@ class _SignupScreenState extends State<SignupScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Confirmação de Senha incorreta!!"),
+        ),
+      );
+    } else if (_selectedFile == null) {
+      setState(() {
+        _clickButton = false;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Selecione uma imagem para o seu perfil!!"),
         ),
       );
     } else {
@@ -145,8 +154,9 @@ class _SignupScreenState extends State<SignupScreen> {
               });
 
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.error.errorMessage),
+                const SnackBar(
+                  content:
+                      Text("Um erro inesperado na criação do seu perfil!!"),
                 ),
               );
 

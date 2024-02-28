@@ -73,11 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
             int limit = 10;
             String ellipsis = "...";
 
-            String limitName = name!.substring(0, limit);
-
-            if(name.length > limit) {
-              limitName += ellipsis;
-            }
+            String limitName = name!.length <= limit
+                ? name
+                : name.substring(0, limit) + ellipsis;
 
             return Scaffold(
               body: _buildScreens.elementAt(_selectedScreenIndex),

@@ -1,6 +1,7 @@
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/utils/strings_app.dart';
 import 'package:connect_pets/app/common/widgets/line_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -13,6 +14,8 @@ class InitScreen extends StatefulWidget {
 }
 
 class _InitScreenState extends State<InitScreen> {
+  final _nameApp = StringsApp.nameApp;
+
   void _criarConta() {
     Navigator.pushNamed(context, RoutesApp.signup);
   }
@@ -46,10 +49,10 @@ class _InitScreenState extends State<InitScreen> {
                   ImagesApp.logo,
                   width: 200,
                 ),
-                const Text(
-                  'Connect Pets\n Ponta de Pedras',
+                Text(
+                  _nameApp,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 30,
                     color: ColorsApp.white,
                     fontWeight: FontWeight.bold,
@@ -77,10 +80,10 @@ class _InitScreenState extends State<InitScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Seja bem-vindo ao Connect Pets, o\nseu aplicativo de adoção/doação\nde animais de estimação.",
+                  Text(
+                    "Seja bem-vindo ao $_nameApp, o\nseu aplicativo de adoção/doação\nde animais de estimação.",
                     textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                   const SizedBox(height: 18),
                   ElevatedButton(

@@ -7,6 +7,7 @@ import 'package:connect_pets/app/features/donate/domain/datasource/idonate_datas
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 const uuid = Uuid();
 
@@ -31,6 +32,14 @@ class DonateDatasource implements DonateDatasourceImpl {
             SettableMetadata(contentType: "image/png"),
           );
       final imageUrl = await saveImage.ref.getDownloadURL();
+
+      final response = await http.get(Uri.parse('https://tinyurl.com/api-create.php?url=$imageUrl'));
+
+      if (response.statusCode != 200) {
+        throw Exception('Falha ao encurtar URL: ${response.reasonPhrase}');
+      }
+
+      final shortUrlImage = response.body;
 
       final secondsSinceEpoch = _now.millisecondsSinceEpoch ~/ 1000;
 
@@ -71,7 +80,7 @@ class DonateDatasource implements DonateDatasourceImpl {
           'id': _postId,
           'age_pet': post.agePet,
           'gender_pet': post.genderPet,
-          'url_image': imageUrl,
+          'url_image': shortUrlImage,
           'created_at': secondsSinceEpoch,
           'updated_at': secondsSinceEpoch,
           'user_id': userId,

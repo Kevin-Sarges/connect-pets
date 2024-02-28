@@ -19,9 +19,9 @@ class LoginDataSource implements LoginDataSourceImpl {
       );
 
       if (user.emailUser == null || user.emailUser == "") {
-        throw CommonNoDataFoundError();
+        throw CommonNoDataFoundError(message: "Email ou senha incorretos");
       } else if (user.passwordUser == null || user.passwordUser == "") {
-        throw CommonNoDataFoundError();
+        throw CommonNoDataFoundError(message: "Email ou senha incorretos");
       }
     } on FirebaseAuthException catch (e) {
       throw CommonNoDataFoundError(message: e.message);

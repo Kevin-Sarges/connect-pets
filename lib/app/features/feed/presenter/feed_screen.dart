@@ -71,10 +71,16 @@ class _FeedScreenState extends State<FeedScreen> {
     );
   }
 
-  void _launchWhatsAppUri(String whatsapp) async {
+  void _launchWhatsAppUri(
+    String whatsapp,
+    String name,
+    String imagePet,
+  ) async {
     final link = WhatsAppUnilink(
-        phoneNumber: '+55 - $whatsapp',
-        text: 'Olá, tenho interesse em adotar o pet🤗');
+      phoneNumber: '+55 - $whatsapp',
+      text:
+          'Olá $name, tenho interesse em adotar o pet🤗\n*foto do pet*:\n$imagePet',
+    );
 
     await launchUrl(link.asUri());
   }
@@ -259,7 +265,10 @@ class _FeedScreenState extends State<FeedScreen> {
                                 const SizedBox(width: 7),
                                 ElevatedButton(
                                   onPressed: () {
-                                    _launchWhatsAppUri(post[index].whatsapp!);
+                                    _launchWhatsAppUri(
+                                        post[index].whatsapp!,
+                                        post[index].nameUser!,
+                                        post[index].urlImage!);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: ColorsApp.green100,

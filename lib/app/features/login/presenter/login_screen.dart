@@ -2,6 +2,7 @@ import 'package:connect_pets/app/common/model/user_model.dart';
 import 'package:connect_pets/app/common/utils/colors_app.dart';
 import 'package:connect_pets/app/common/utils/images_app.dart';
 import 'package:connect_pets/app/common/utils/routes_app.dart';
+import 'package:connect_pets/app/common/utils/strings_app.dart';
 import 'package:connect_pets/app/common/widgets/divider_widgets.dart';
 import 'package:connect_pets/app/common/widgets/inputs_widgets/input_form_widget.dart';
 import 'package:connect_pets/app/common/widgets/inputs_widgets/input_password_widget.dart';
@@ -26,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _textControllerEmail = TextEditingController();
   final _textControllerPassword = TextEditingController();
+  final _nameApp = StringsApp.nameApp;
 
   bool _clickButton = false;
   bool _isHiddenText = true;
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
         bloc: _cubit,
         listener: (context, state) {
           if (state is LoginError) {
-            _snackBarLogin(state.error.errorMessage);
+            _snackBarLogin("Email ou senha incorretos");
 
             return;
           }
@@ -118,10 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ImagesApp.logo,
                     width: 200,
                   ),
-                  const Text(
-                    'Connect Pets\n Ponta de Pedras',
+                  Text(
+                    _nameApp,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                       color: ColorsApp.white,
                       fontWeight: FontWeight.bold,
