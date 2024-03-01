@@ -68,7 +68,7 @@ class _InitScreenState extends State<InitScreen> {
                 horizontal: 21,
               ),
               width: w,
-              height: h * 0.45,
+              height: h * 0.4,
               decoration: const BoxDecoration(
                 color: ColorsApp.green50,
                 borderRadius: BorderRadius.only(

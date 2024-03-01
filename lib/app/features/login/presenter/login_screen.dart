@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   horizontal: 21,
                 ),
                 width: w,
-                height: h * 0.45,
+                height: h * 0.5,
                 decoration: const BoxDecoration(
                   color: ColorsApp.green50,
                   borderRadius: BorderRadius.only(
