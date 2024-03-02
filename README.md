@@ -14,7 +14,7 @@ O aplicativo busca facilitar o acesso de pessoas interessadas em adotar ou doar 
 
 - Sistema de autenticação(Email&Senha, Gmail).
 - Sistema de criação, edição e deleção postagens.
-- Sistema de contato com outros doadoras atravez do whatsap.
+- Sistema de contato com outros doadoras atravez do whatsapp.
 
 ### Telas
 
