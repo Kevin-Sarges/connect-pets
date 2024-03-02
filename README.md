@@ -19,9 +19,9 @@ O aplicativo busca facilitar o acesso de pessoas interessadas em adotar ou doar 
 ### Telas
 
 <div class="imagem-container" style="display: flex;">
-    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/splash.png?alt=media&token=16dc5157-aa8f-47e8-a3dc-f7cad770cf1f" alt="Imagem 1" style="width: 200px; height: auto; margin-right: 10px;">
-    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/feed.png?alt=media&token=05fe6416-69b9-4079-863d-2d2691f2f5ba" alt="Imagem 2" style="width: 200px; height: auto; margin-right: 10px;">
-    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/donate-1.png?alt=media&token=10e74934-709c-41a6-991c-33f90866027f" alt="Imagem 3" style="width: 200px; height: auto; margin-right: 10px;">
-    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/profile%201.png?alt=media&token=41f09280-c168-4b03-9514-8e65e7f6f721" alt="Imagem 4" style="width: 200px; height: auto; margin-right: 10px;">
-    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/post%201.png?alt=media&token=c0976d02-d2da-4b81-a524-d1e7c633a5e6" alt="Imagem 4" style="width: 200px; height: auto; margin-right: 10px;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/splash.png?alt=media&token=16dc5157-aa8f-47e8-a3dc-f7cad770cf1f" alt="Imagem 1" style="width: 170px; height: auto; margin-right: 10px;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/feed.png?alt=media&token=05fe6416-69b9-4079-863d-2d2691f2f5ba" alt="Imagem 2" style="width: 170px; height: auto; margin-right: 10px;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/donate-1.png?alt=media&token=10e74934-709c-41a6-991c-33f90866027f" alt="Imagem 3" style="width: 170px; height: auto; margin-right: 10px;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/profile%201.png?alt=media&token=41f09280-c168-4b03-9514-8e65e7f6f721" alt="Imagem 4" style="width: 170px; height: auto; margin-right: 10px;">
+    <img src="https://firebasestorage.googleapis.com/v0/b/images-9ea60.appspot.com/o/post%201.png?alt=media&token=c0976d02-d2da-4b81-a524-d1e7c633a5e6" alt="Imagem 4" style="width: 170px; height: auto; margin-right: 10px;">
 </div>
