@@ -184,36 +184,55 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
+                    SizedBox(
+                      width: w,
+                      child: ElevatedButton(
+                        onPressed:
+                        _clickButton ? null : () => _loginEmailPassword(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsApp.green100,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 48,
+                            vertical: 10,
+                          ),
+                        ),
+                        child: _clickButton
+                            ? const ProgressIndicatorWidget(
+                          color: ColorsApp.white,
+                        )
+                            : const Text(
+                          "Entrar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: ColorsApp.white,
+                          ),
+                        ),
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          onPressed:
-                              _clickButton ? null : () => _loginEmailPassword(),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsApp.green100,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 48,
-                              vertical: 10,
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              RoutesApp.signup,
+                              (_) => false,
+                            );
+                          },
+                          child: const Text(
+                            "Criar conta",
+                            style: TextStyle(
+                              color: ColorsApp.blue,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: _clickButton
-                              ? const ProgressIndicatorWidget(
-                                  color: ColorsApp.white,
-                                )
-                              : const Text(
-                                  "Entrar",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorsApp.white,
-                                  ),
-                                ),
                         ),
                         TextButton(
                           onPressed: () => _refactorPassword(),
                           child: const Text(
-                            "Esqueciminha senha",
+                            "Esqueci minha senha",
                             style: TextStyle(
                               color: ColorsApp.blue,
                               fontWeight: FontWeight.bold,

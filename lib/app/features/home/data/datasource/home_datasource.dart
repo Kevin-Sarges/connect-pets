@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connect_pets/app/common/entity/user_entity.dart';
 import 'package:connect_pets/app/common/error/common_errors.dart';
 import 'package:connect_pets/app/features/home/domain/datasource/ihome_datasource.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeDatasource implements HomeDatasourceImpl {
   final _firefireStore = FirebaseFirestore.instance;
@@ -24,10 +23,10 @@ class HomeDatasource implements HomeDatasourceImpl {
           whatsappUser: data['whatsapp_user'],
           cityUser: data['city_user'],
         );
-      }).toList().first;
+      }).toList();
 
-      return user;
-    } on FirebaseAuthException catch (e) {
+      return user.first;
+    } on FirebaseException catch (e) {
       throw CommonNoDataFoundError(message: e.message);
     }
   }

@@ -58,10 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           if (state is HomeError) {
-            return const Scaffold(
+            return Scaffold(
               backgroundColor: ColorsApp.white,
               body: ErrorScreenWidget(
-                messageError: "Erro nos dados do app 😬",
+                messageError: state.error.errorMessage,
               ),
             );
           }
